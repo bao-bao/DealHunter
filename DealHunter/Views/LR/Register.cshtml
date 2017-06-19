@@ -8,13 +8,88 @@
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/style2.css">
-    <link rel="stylesheet" href="css/superfish.css">
-    <link rel="stylesheet" href="css/style.css">
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/style2.css">
+    <link rel="stylesheet" href="~/css/superfish.css">
+    <link rel="stylesheet" href="~/css/style3.css">
+    <script type="text/javascript">
+            function register()
+            {
+                var registerid = $("#uid").val();
+                if (registerid.length < 5 || registerid.length > 20)
+                {
+                    $("#registerMessage").text("账号应不低于5位且不超过20位");
+                    return;
+                }
+                var registerpwd = $("#upwd").val();
+                if (registerpwd.length < 5 || registerpwd.length > 64)
+                {
+                    $("#registerMessage").text("密码应不低于5位且不超过64位");
+                    return;
+                }
+                var registerrepwd = $("#urepwd").val();
+                if (registerpwd != registerrepwd)
+                {
+                    $("#registerMessage").text("两次密码不一致");
+                    return;
+                }
+                var registerpincode = $("#upincode").val();
+                if (registerpincode.length != 18)
+                {
+                    $("#registerMessage").text("身份证错误");
+                    return;
+                }
+                var registermail = $("#umail").val();
+                if (registermail.indexOf("@@") < 0)
+                {
+                    $("#registerMessage").text("邮箱错误");
+                    return;
+                }
+                var registerceilphone = $("#uceilphone").val();
+                if (registerceilphone.length != 11)
+                {
+                    $("#registerMessage").text("电话错误");
+                    return;
+                }
+                $.ajax(
+                    {
+                        url: '@Url.Action("Register")',
+                        type: "Post",
+                        dataType: "text",
+                        data: {
+                            "registerid": registerid,
+                            "registerpwd": registerpwd,
+                            "registerpincode": registerpincode,
+                            "registername": $("#uname").val(),
+                            "registermail": registermail,
+                            "registerceilphone": registerceilphone
+                        },
+                        success: function (result, status) {
+                            if (result == "1") {
+                                alert("注册成功");
+                                window.location = '@Url.Action("Login")';
+                            }
+                            else {
+                                alert("注册失败,用户名或身份证已被注册");
+                            }
+                        },
+                        error: function (xhr) {
+                            alert("错误" + xhr.responseText);
+                        }
+                    }
+                );
+        }
+        $("#reloginbtn").click(
+            function ()
+            {
+                window.location = '@Url.Action("Login")';
+            }
+        )
+    </script>
 </head>
-<body style="background: url('images/register.png') no-repeat; background-size: 100% 100%">
+<body style="background: url('../../images/register.png') no-repeat; background-size: 100% 108%">
 
     <div class="container">
         <div class="row" style="margin-top: 15vh">
@@ -53,10 +128,10 @@
                     </div>
                     <br />
                     <div class="form-group">
-                        <input type="button" class="form-control btn btn-primary" value="注册" style="background-color: #2b542c; border-radius: 10px">
+                        <input type="button" id="registerbtn" class="form-control btn btn-primary" value="注册" style="background-color: #2b542c; border-radius: 10px" onclick="register();">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="form-control btn btn-primary" value="返回登录界面" style="background-color: #2b542c; border-radius: 10px">
+                        <input type="button" id="reloginbtn" class="form-control btn btn-primary" value="返回登录界面" style="background-color: #2b542c; border-radius: 10px">
                     </div>
                 </form>
             </div>

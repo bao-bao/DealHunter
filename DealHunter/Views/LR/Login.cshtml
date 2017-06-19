@@ -4,14 +4,87 @@
 }
 
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/style2.css">
+    <link rel="stylesheet" href="~/css/superfish.css">
+    <link rel="stylesheet" href="~/css/style3.css">
+    <script type="text/javascript">
+        function login()
+        {
+            $.ajax(
+                {
+                    url: '@Url.Action("Login")',
+                    type: "Post",
+                    dataType: "text",
+                    data: {
+                        "loginid": $("#uid").val(),
+                        "loginpwd": $("#upwd").val()
+                    },
+                    success: function (data, status) {
+                        if (data == "1") {
+                            alert("登录成功");
+                        }
+                        else if (data == "-1") {
+                            alert("账号不存在");
+                        }
+                        else if (data == "-2") {
+                            alert("账号密码错误");
+                        }
+                        else {
+                            alert("错误");
+                        }
+                    },
+                    error: function (xhr) {
+                        alert("错误" + xhr.responseText);
+                    }
+                }
+            );
+        }
+        $("#toregister").click(
+            function ()
+            {
+                window.location = '@Url.Action("Register")';
+            }
+        )
+    </script>
 </head>
-<body>
-    <div> 
+<body style="background: url('../../images/login.png') no-repeat; background-size: 100% 105%">
+
+    <div class="container">
+        <div class="row" style="margin-top: 15vh">
+            <div class="col-md-4 col-md-offset-4">
+                <form action="#" class="fh5co-form animate-box" data-animate-effect="fadeIn" style="background-color: #c0a16b; border-radius: 10px">
+                    <div class="form-group">
+                        <label for="uid" class="sr-only">用户名</label>
+                        <input type="text" class="form-control" style="border-radius: 10px" id="uid" placeholder=" 用户名" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="upwd" class="sr-only">密码</label>
+                        <input type="password" class="form-control" style="border-radius: 10px" id="upwd" placeholder=" 密码" autocomplete="off" required>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="button" id="loginbtn" value="登录" class="form-control btn btn-primary" style="background-color: #2b542c; border-radius: 10px" onclick="login();">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" id="toregister" value="注册" class="form-control btn btn-primary" style="background-color: #2b542c; border-radius: 10px">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <footer>
+        <div class="row" style="padding-top: 60px; clear: both;">
+            <div class="col-md-12 text-center"><p><small>&copy; All Rights Reserved. Designed by Deal Hunter</small></p></div>
+        </div>
+    </footer>
+
 </body>
 </html>
