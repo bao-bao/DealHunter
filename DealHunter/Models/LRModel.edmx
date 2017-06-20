@@ -11,19 +11,19 @@
           </Key>
           <Property Name="uid" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="upwd" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="upincode" Type="char" MaxLength="18" Nullable="false" />
+          <Property Name="upincode" Type="varchar" MaxLength="18" Nullable="false" />
           <Property Name="uname" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="ugender" Type="varchar" MaxLength="1" />
-          <Property Name="uage" Type="int" />
-          <Property Name="ucareer" Type="varchar" MaxLength="64" />
+          <Property Name="ugender" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="uage" Type="int" Nullable="false" />
+          <Property Name="ucareer" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="umail" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="utelephone" Type="varchar" MaxLength="11" />
+          <Property Name="utelephone" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="uceilphone" Type="varchar" MaxLength="11" Nullable="false" />
-          <Property Name="uprovince" Type="varchar" MaxLength="32" />
-          <Property Name="ucity" Type="varchar" MaxLength="32" />
-          <Property Name="udistrict" Type="varchar" MaxLength="32" />
-          <Property Name="ustreet" Type="varchar" MaxLength="96" />
-          <Property Name="uzipcode" Type="varchar" MaxLength="6" />
+          <Property Name="uprovince" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="ucity" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="udistrict" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="ustreet" Type="varchar" MaxLength="96" Nullable="false" />
+          <Property Name="uzipcode" Type="varchar" MaxLength="6" Nullable="false" />
         </EntityType>
         <EntityContainer Name="LRModelStoreContainer">
           <EntitySet Name="user" EntityType="Self.user" Schema="dealhunter" store:Type="Tables" />
@@ -41,17 +41,17 @@
           <Property Name="upwd" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="upincode" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="uname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ugender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="uage" Type="Int32" />
-          <Property Name="ucareer" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ugender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uage" Type="Int32" Nullable="false" />
+          <Property Name="ucareer" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="umail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="utelephone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="utelephone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="uceilphone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="uprovince" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="ucity" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="udistrict" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="ustreet" Type="String" MaxLength="96" FixedLength="false" Unicode="false" />
-          <Property Name="uzipcode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="uprovince" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ucity" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="udistrict" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ustreet" Type="String" MaxLength="96" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uzipcode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityContainer Name="LREntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="user" EntityType="Self.user" />

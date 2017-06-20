@@ -19,7 +19,7 @@ namespace DealHunter.Models
         public string upincode { get; set; }
         public string uname { get; set; }
         public string ugender { get; set; }
-        public Nullable<int> uage { get; set; }
+        public int uage { get; set; }
         public string ucareer { get; set; }
         public string umail { get; set; }
         public string utelephone { get; set; }

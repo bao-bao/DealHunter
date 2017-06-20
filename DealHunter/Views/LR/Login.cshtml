@@ -29,6 +29,7 @@
                     success: function (data, status) {
                         if (data == "1") {
                             alert("登录成功");
+                            window.location = '@Url.Action("Basicinfo")';
                         }
                         else if (data == "-1") {
                             alert("账号不存在");

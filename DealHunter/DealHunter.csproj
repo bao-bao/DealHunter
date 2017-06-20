@@ -222,6 +222,9 @@
     <Content Include="images\login.png" />
     <Content Include="images\pwdmanage.png" />
     <Content Include="images\register.png" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\jsAddress.js" />
     <Content Include="Models\LRModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LRModel.edmx</DependentUpon>
@@ -237,6 +240,7 @@
     <Content Include="css\.DS_Store" />
     <Content Include="css\style2.css.map" />
     <Content Include="images\.DS_Store" />
+    <Content Include="js\.DS_Store" />
     <EntityDeploy Include="Models\LRModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LRModel.Designer.cs</LastGenOutput>
@@ -257,7 +261,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -267,6 +273,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\LR\Login.cshtml" />
     <Content Include="Views\LR\Register.cshtml" />
+    <Content Include="Views\LR\Basicinfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

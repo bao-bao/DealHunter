@@ -1,0 +1,131 @@
+﻿@model DealHunter.Controllers.LRController.basicinfouser
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/style2.css">
+    <link rel="stylesheet" href="~/css/superfish.css">
+    <link rel="stylesheet" href="~/css/style3.css">
+    <script type="text/javascript" src="~/js/jsAddress.js"></script>
+</head>
+<body style="background: url('../../images/basicinfo.png'); background-size: cover">
+
+    <header id="fh5co-header-section" class="sticky-banner">
+        <div class="container">
+            <div class="nav-header">
+                <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+                <h1 id="fh5co-logo"><a href="#"><i class="icon-home"></i>Deal<span>Hunter</span></a></h1>
+                <nav id="fh5co-menu-wrap" role="navigation">
+                    <ul class="sf-menu" id="fh5co-primary-menu">
+                        <li class="active">
+                            <a href="properties.html" class="fh5co-sub-ddown">交易</a>
+                            <ul class="fh5co-sub-menu">
+                                <li><a href="#">大厅</a></li>
+                                <li><a href="#">发布</a></li>
+                            </ul>
+                        </li>
+                        <li class="active">
+                            <a href="properties.html" class="fh5co-sub-ddown">我的</a>
+                            <ul class="fh5co-sub-menu">
+                                <li class="active">
+                                    <a href="#" class="fh5co-sub-ddown">个人</a>
+                                    <ul class="fh5co-sub-menu">
+                                        <li><a href="#">基本信息</a></li>
+                                        <li><a href="#">密码管理</a></li>
+                                    </ul>
+                                </li>
+                                <li class="active">
+                                    <a href="#" class="fh5co-sub-ddown">交易</a>
+                                    <ul class="fh5co-sub-menu">
+                                        <li><a href="#">我发布的</a></li>
+                                        <li><a href="#">我想要的</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">注销 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <form class="col-lg-offset-1 col-lg-10 fh5co-form animate-box" data-animate-effect="fadeIn" style="opacity: 0.8; border-radius: 10px">
+            <div class="form-group col-lg-6">
+                <label>用户账号</label>
+                <input type="text" class="form-control" id="basicid" name="basicid" value=@Model.uid disabled >
+            </div>
+            <div class="form-group col-lg-6">
+                <label>用户名</label>
+                <input type="text" class="form-control" id="basicname" name="basicname" value=@Model.uname >
+            </div>
+            <div class="form-group col-lg-4">
+                <label>性别</label>
+                <input type="text" class="form-control" id="basicgender" name="basicgender" value=@Model.ugender >
+            </div>
+            <div class="form-group col-lg-4">
+                <label>年龄</label>
+                <input type="text" class="form-control" id="basicage" name="basicage" value=@Model.uage >
+            </div>
+            <div class="form-group col-lg-4">
+                <label>职业</label>
+                <input type="text" class="form-control" id="basiccareer" name="basiccareer" value=@Model.ucareer >
+            </div>
+            <div class="form-group col-lg-4">
+                <label>邮箱</label>
+                <input type="text" class="form-control" id="basicmail" name="basicmail" value=@Model.umail >
+            </div>
+            <div class="form-group col-lg-4">
+                <label>固定电话</label>
+                <input type="text" class="form-control" id="basictelephone" name="basictelephone" value=@Model.utelephone >
+            </div>
+            <div class="form-group col-lg-4">
+                <label>移动电话</label>
+                <input type="text" class="form-control" id="basicceilphone" name="basicceilphone" value=@Model.uceilphone >
+            </div>
+            <div class="form-group col-lg-4">
+                <label>省市区</label>
+                <select class="form-control col-lg-4" id="cmbProvince" name="cmbProvince"></select>
+            </div>
+            <div class="form-group col-lg-4">
+                <label>&nbsp;</label>
+                <select class="form-control col-lg-4" id="cmbCity" name="cmbCity"></select>
+            </div>
+            <div class="form-group col-lg-4">
+                <label>&nbsp;</label>
+                <select class="form-control col-lg-4" id="cmbArea" name="cmbArea"></select>
+            </div>
+            <script type="text/javascript">
+                addressInit('cmbProvince', 'cmbCity', 'cmbArea', @Model.uprovince, @Model.ucity, @Model.udistrict);
+            </script>
+            <div class="form-group col-lg-10">
+                <label>详细地址</label>
+                <input type="text" class="form-control" id="basicstreet" name="basicstreet" value=@Model.ustreet >
+            </div>
+            <div class="form-group col-lg-2">
+                <label>邮编</label>
+                <input type="text" class="form-control" id="basiczipcode" name="basiczipcode" value=@Model.uzipcode >
+            </div>
+            <div class="form-group col-lg-12">
+                <button type="button" class="form-control btn btn-success">修改</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <div class="row" style="padding-top: 60px; clear: both;">
+            <div class="col-md-12 text-center"><p><small>&copy; All Rights Reserved. Designed by Deal Hunter</small></p></div>
+        </div>
+    </footer>
+
+</body>
+</html>
