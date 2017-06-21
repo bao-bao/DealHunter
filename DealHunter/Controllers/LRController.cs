@@ -244,5 +244,11 @@ namespace DealHunter.Controllers
             }
         }
 
+        public ActionResult Logout()
+        {
+            Session["uid"] = null;
+            return RedirectToAction("Login", "LR");
+        }
+
     }
 }
