@@ -216,6 +216,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LRModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\MD5Encrypt.cs" />
     <Compile Include="Models\user.cs">
       <DependentUpon>GoodsModel.tt</DependentUpon>
     </Compile>
