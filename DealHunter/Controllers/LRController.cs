@@ -189,5 +189,60 @@ namespace DealHunter.Controllers
             }
         }
 
+        public ActionResult Pwdmanage()
+        {
+            try
+            {
+                String basicid = (String)Session["uid"];
+                if (basicid == null)
+                {
+                    return RedirectToAction("Login", "LR");
+                }
+                basicinfouser buser = db.user.Where(u => u.uid == basicid).Select(u => new basicinfouser() { uid = u.uid, uname = u.uname, ugender = u.ugender, uage = u.uage, ucareer = u.ucareer, umail = u.umail, utelephone = u.utelephone, uceilphone = u.uceilphone, uprovince = u.uprovince, ucity = u.ucity, udistrict = u.udistrict, ustreet = u.ustreet, uzipcode = u.uzipcode }).FirstOrDefault();
+                if (buser == null)
+                {
+                    return RedirectToAction("Login", "LR");
+                }
+                return View();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return RedirectToAction("Login", "LR");
+            }
+
+        }
+        [HttpPost]
+        public String Pwdmanage(String oldpwd, String newpwd)
+        {
+            try
+            {
+                String pwdid = (String)Session["uid"];
+                if (pwdid == null)
+                {
+                    return "-1";
+                }
+                user puser = db.user.Where(u => u.uid == pwdid).Select(u => u).FirstOrDefault();
+                if (puser == null)
+                {
+                    return "-1";
+                }
+                if (puser.upwd != oldpwd)
+                {
+                    return "-2";
+                }
+                puser.upwd = newpwd;
+                db.user.Attach(puser);
+                db.Entry(puser).State = EntityState.Modified;
+                db.SaveChanges();
+                return "1";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return "0";
+            }
+        }
+
     }
 }

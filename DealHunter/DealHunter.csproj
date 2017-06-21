@@ -274,6 +274,7 @@
     <Content Include="Views\LR\Login.cshtml" />
     <Content Include="Views\LR\Register.cshtml" />
     <Content Include="Views\LR\Basicinfo.cshtml" />
+    <Content Include="Views\LR\Pwdmanage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
