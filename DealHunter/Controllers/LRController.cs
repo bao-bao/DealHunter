@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using DealHunter.Models;
 using System.Data.Entity.Validation;
 using System.Text;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
 
 namespace DealHunter.Controllers
 {
@@ -141,33 +143,48 @@ namespace DealHunter.Controllers
 
         }
         [HttpPost]
-        public String Basicinfo(String registerid, String registerpwd, String registerpincode, String registername, String registermail, String registerceilphone)
+        public String Basicinfo(String basicid, String basicname, String basicgender, String basicage, String basiccareer, String basicmail, String basictelephone, String basicceilphone, String basicprovince, String basiccity, String basicdistrict, String basicstreet, String basiczipcode)
         {
-            user registeruser = new user();
-            registeruser.uid = registerid;
-            registeruser.upwd = registerpwd;
-            registeruser.upincode = registerpincode;
-            registeruser.uname = registername;
-            registeruser.ugender = "";
-            registeruser.uage = 0;
-            registeruser.ucareer = "";
-            registeruser.umail = registermail;
-            registeruser.utelephone = "";
-            registeruser.uceilphone = registerceilphone;
-            registeruser.uprovince = "";
-            registeruser.ucity = "";
-            registeruser.udistrict = "";
-            registeruser.ustreet = "";
-            registeruser.uzipcode = "";
-
             try
             {
-                db.user.Add(registeruser);
+                user modifyuser = new user()
+                {
+                    uid = basicid,
+                    upwd = "",
+                    upincode = "",
+                    uname = basicname,
+                    ugender = basicgender,
+                    uage = int.Parse(basicage),
+                    ucareer = basiccareer,
+                    umail = basicmail,
+                    utelephone = basictelephone,
+                    uceilphone = basicceilphone,
+                    uprovince = basicprovince,
+                    ucity = basiccity,
+                    udistrict = basicdistrict,
+                    ustreet = basicstreet,
+                    uzipcode = basiczipcode
+                };
+                DbEntityEntry<user> entry = db.Entry<user>(modifyuser);
+                entry.State = EntityState.Unchanged;
+                entry.Property(t => t.uname).IsModified = true;
+                entry.Property(t => t.ugender).IsModified = true;
+                entry.Property(t => t.uage).IsModified = true;
+                entry.Property(t => t.ucareer).IsModified = true;
+                entry.Property(t => t.umail).IsModified = true;
+                entry.Property(t => t.utelephone).IsModified = true;
+                entry.Property(t => t.uceilphone).IsModified = true;
+                entry.Property(t => t.uprovince).IsModified = true;
+                entry.Property(t => t.ucity).IsModified = true;
+                entry.Property(t => t.udistrict).IsModified = true;
+                entry.Property(t => t.ustreet).IsModified = true;
+                entry.Property(t => t.uzipcode).IsModified = true;
                 db.SaveChanges();
                 return "1";
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 return "0";
             }
         }

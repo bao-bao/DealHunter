@@ -15,6 +15,59 @@
     <link rel="stylesheet" href="~/css/superfish.css">
     <link rel="stylesheet" href="~/css/style3.css">
     <script type="text/javascript" src="~/js/jsAddress.js"></script>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+            function bimodify()
+            {
+                var basicid = $("#basicid").val();
+                var basicmail = $("#basicmail").val();
+                if (basicmail.indexOf("@@") < 0)
+                {
+                    alert("邮箱有误");
+                    return;
+                }
+                var basictelephone = $("#basictelephone").val();
+                var basicceilphone = $("#basicceilphone").val();
+                if (basicceilphone.length != 11)
+                {
+                    alert("移动电话错误");
+                    return;
+                }
+                $.ajax(
+                    {
+                        url: '@Url.Action("Basicinfo")',
+                        type: "Post",
+                        dataType: "text",
+                        data: {
+                            "basicid": basicid,
+                            "basicname": $("#basicname").val(),
+                            "basicgender": $("#basicgender").val(),
+                            "basicage": $("#basicage").val(),
+                            "basiccareer": $("#basiccareer").val(),
+                            "basicmail": basicmail,
+                            "basictelephone": basictelephone,
+                            "basicceilphone": basicceilphone,
+                            "basicprovince": $("#cmbProvince").val(),
+                            "basiccity": $("#cmbCity").val(),
+                            "basicdistrict": $("#cmbArea").val(),
+                            "basicstreet": $("#basicstreet").val(),
+                            "basiczipcode": $("#basiczipcode").val()
+                        },
+                        success: function (result, status) {
+                            if (result == "1") {
+                                alert("修改成功");
+                            }
+                            else {
+                                alert(result+"修改失败,请检测修改信息");
+                            }
+                        },
+                        error: function (xhr) {
+                            alert("错误" + xhr.responseText);
+                        }
+                    }
+                );
+        }
+    </script>
 </head>
 <body style="background: url('../../images/basicinfo.png'); background-size: cover">
 
@@ -62,35 +115,35 @@
         <form class="col-lg-offset-1 col-lg-10 fh5co-form animate-box" data-animate-effect="fadeIn" style="opacity: 0.8; border-radius: 10px">
             <div class="form-group col-lg-6">
                 <label>用户账号</label>
-                <input type="text" class="form-control" id="basicid" name="basicid" value=@Model.uid disabled >
+                <input type="text" class="form-control" id="basicid" name="basicid" value="@Model.uid" disabled >
             </div>
             <div class="form-group col-lg-6">
                 <label>用户名</label>
-                <input type="text" class="form-control" id="basicname" name="basicname" value=@Model.uname >
+                <input type="text" class="form-control" id="basicname" name="basicname" value="@Model.uname" >
             </div>
             <div class="form-group col-lg-4">
                 <label>性别</label>
-                <input type="text" class="form-control" id="basicgender" name="basicgender" value=@Model.ugender >
+                <input type="text" class="form-control" id="basicgender" name="basicgender" value="@Model.ugender" >
             </div>
             <div class="form-group col-lg-4">
                 <label>年龄</label>
-                <input type="text" class="form-control" id="basicage" name="basicage" value=@Model.uage >
+                <input type="tel" class="form-control" id="basicage" name="basicage" value="@Model.uage" >
             </div>
             <div class="form-group col-lg-4">
                 <label>职业</label>
-                <input type="text" class="form-control" id="basiccareer" name="basiccareer" value=@Model.ucareer >
+                <input type="text" class="form-control" id="basiccareer" name="basiccareer" value="@Model.ucareer" >
             </div>
             <div class="form-group col-lg-4">
                 <label>邮箱</label>
-                <input type="text" class="form-control" id="basicmail" name="basicmail" value=@Model.umail >
+                <input type="text" class="form-control" id="basicmail" name="basicmail" value="@Model.umail" >
             </div>
             <div class="form-group col-lg-4">
                 <label>固定电话</label>
-                <input type="text" class="form-control" id="basictelephone" name="basictelephone" value=@Model.utelephone >
+                <input type="tel" class="form-control" id="basictelephone" name="basictelephone" value="@Model.utelephone" >
             </div>
             <div class="form-group col-lg-4">
                 <label>移动电话</label>
-                <input type="text" class="form-control" id="basicceilphone" name="basicceilphone" value=@Model.uceilphone >
+                <input type="tel" class="form-control" id="basicceilphone" name="basicceilphone" value="@Model.uceilphone" >
             </div>
             <div class="form-group col-lg-4">
                 <label>省市区</label>
@@ -105,18 +158,18 @@
                 <select class="form-control col-lg-4" id="cmbArea" name="cmbArea"></select>
             </div>
             <script type="text/javascript">
-                addressInit('cmbProvince', 'cmbCity', 'cmbArea', @Model.uprovince, @Model.ucity, @Model.udistrict);
+                addressInit('cmbProvince', 'cmbCity', 'cmbArea', '@Model.uprovince', '@Model.ucity', '@Model.udistrict');
             </script>
             <div class="form-group col-lg-10">
                 <label>详细地址</label>
-                <input type="text" class="form-control" id="basicstreet" name="basicstreet" value=@Model.ustreet >
+                <input type="text" class="form-control" id="basicstreet" name="basicstreet" value="@Model.ustreet" >
             </div>
             <div class="form-group col-lg-2">
                 <label>邮编</label>
-                <input type="text" class="form-control" id="basiczipcode" name="basiczipcode" value=@Model.uzipcode >
+                <input type="tel" class="form-control" id="basiczipcode" name="basiczipcode" value="@Model.uzipcode" >
             </div>
             <div class="form-group col-lg-12">
-                <button type="button" class="form-control btn btn-success">修改</button>
+                <button type="button" class="form-control btn btn-success" onclick="bimodify();">修改</button>
             </div>
         </form>
     </div>
