@@ -1,0 +1,168 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布交易信息</title>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/style2.css">
+    <link rel="stylesheet" href="~/css/superfish.css">
+    <link rel="stylesheet" href="~/css/style3.css">
+    <script type="text/javascript">
+            function creategoodsinfo()
+            {
+                var goodsname = $("#dealname").val();
+                if (goodsname == "")
+                {
+                    alert("请输入商品名");
+                    return;
+                }
+                var goodslow = $("#deallow").val();
+                if (goodslow == "")
+                {
+                    alert("请输入最低价");
+                    return;
+                }
+                else if (parseInt(goodslow) < 0 || parseInt(goodslow) > 2000000000)
+                {
+                    alert("最低价取值应在0-2000000000之间");
+                    return;
+                }
+                var goodshigh = $("#dealhigh").val();
+                if (goodshigh == "") {
+                    alert("请输入最高价");
+                    return;
+                }
+                else if (parseInt(goodshigh) < 0 || parseInt(goodshigh) > 2000000000) {
+                    alert("最高价取值应在0-2000000000之间");
+                    return;
+                }
+                if (parseInt(goodslow) > parseInt(goodshigh))
+                {
+                    alert("最低价应不高于最高价");
+                    return;
+                }
+                $.ajax(
+                    {
+                        url: '@Url.Action("Creategoodsinfo")',
+                        type: "Post",
+                        dataType: "text",
+                        data: {
+                            "goodsname": $("#dealname").val(),
+                            "goodstype": $("#dealtype").val(),
+                            "goodslow": $("#deallow").val(),
+                            "goodshigh": $("#dealhigh").val(),
+                            "goodsdes": $("#dealdes").val(),
+                        },
+                        success: function (result, status) {
+                            if (result == "1") {
+                                alert("发布成功");
+                            }
+                            else if (result == "-1")
+                            {
+                                alert("登录失效，请重新登陆");
+                            }
+                            else {
+                                alert("发布失败,请检查交易信息是否合法");
+                            }
+                        },
+                        error: function (xhr) {
+                            alert("错误" + xhr.responseText);
+                        }
+                    }
+                );
+        }
+    </script>
+</head>
+<body style="background: url('../../images/createdeal.png'); background-size: cover">
+
+    <header id="fh5co-header-section" class="sticky-banner">
+        <div class="container">
+            <div class="nav-header">
+                <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+                <h1 id="fh5co-logo"><a href="#"><i class="icon-home"></i>Deal<span>Hunter</span></a></h1>
+                <nav id="fh5co-menu-wrap" role="navigation">
+                    <ul class="sf-menu" id="fh5co-primary-menu">
+                        <li class="active">
+                            <a href="#" class="fh5co-sub-ddown">交易</a>
+                            <ul class="fh5co-sub-menu">
+                                <li><a href="#">大厅</a></li>
+                                <li><a href='@Url.Action("Creategoodsinfo", "Goods")'>发布</a></li>
+                            </ul>
+                        </li>
+                        <li class="active">
+                            <a href="#" class="fh5co-sub-ddown">我的</a>
+                            <ul class="fh5co-sub-menu">
+                                <li class="active">
+                                    <a href="#" class="fh5co-sub-ddown">个人</a>
+                                    <ul class="fh5co-sub-menu">
+                                        <li><a href='@Url.Action("Basicinfo", "LR")'>基本信息</a></li>
+                                        <li><a href='@Url.Action("Pwdmanage", "LR")'>密码管理</a></li>
+                                    </ul>
+                                </li>
+                                <li class="active">
+                                    <a href="#" class="fh5co-sub-ddown">交易</a>
+                                    <ul class="fh5co-sub-menu">
+                                        <li><a href="#">我发布的</a></li>
+                                        <li><a href="#">我想要的</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">注销 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <form class="col-lg-offset-4 col-lg-8 fh5co-form animate-box" data-animate-effect="fadeIn" style="opacity: 0.8; border-radius: 10px">
+            <div class="form-group col-lg-8">
+                <label>交易品名</label>
+                <input type="text" class="form-control" id="dealname" name="dealname" value="" />
+            </div>
+            <div class="form-group col-lg-4">
+                <label>交易类型</label>
+                <select class="form-control" id="dealtype" name="dealtype">
+                    <option selected="selected" value="0">出租</option>
+                    <option value="1">售卖</option>
+                </select>
+            </div>
+            <label class="col-lg-12">价格</label>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3">最低价</label>
+                <div class="col-lg-9">
+                    <input type="tel" class="form-control" id="deallow" name="deallow" value="" />
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3">最高价</label>
+                <div class="col-lg-9">
+                    <input type="tel" class="form-control" id="dealhigh" name="dealhigh" value="" />
+                </div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label>具体信息</label>
+                <textarea class="form-control" id="dealdes" name="dealdes" value="" style="resize: none; height: 200px" maxlength="8192"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="button" class="form-control btn btn-success" onclick="creategoodsinfo();">发布</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <div class="row" style="padding-top: 60px; clear: both;">
+            <div class="col-md-12 text-center"><p><small>&copy; All Rights Reserved. Designed by Deal Hunter</small></p></div>
+        </div>
+    </footer>
+
+</body>
+</html>

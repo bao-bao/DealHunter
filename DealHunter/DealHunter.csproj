@@ -177,9 +177,28 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\LRController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\goods.cs">
+      <DependentUpon>GoodsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GoodsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GoodsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GoodsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GoodsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GoodsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GoodsModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LRModel.Context.cs">
@@ -198,7 +217,7 @@
       <DependentUpon>LRModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
-      <DependentUpon>LRModel.tt</DependentUpon>
+      <DependentUpon>GoodsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -225,6 +244,16 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\jsAddress.js" />
+    <Content Include="Models\GoodsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GoodsModel.edmx</DependentUpon>
+      <LastGenOutput>GoodsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\GoodsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GoodsModel.edmx</DependentUpon>
+      <LastGenOutput>GoodsModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\LRModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LRModel.edmx</DependentUpon>
@@ -247,6 +276,13 @@
     </EntityDeploy>
     <Content Include="Models\LRModel.edmx.diagram">
       <DependentUpon>LRModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\GoodsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GoodsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\GoodsModel.edmx.diagram">
+      <DependentUpon>GoodsModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -275,6 +311,7 @@
     <Content Include="Views\LR\Register.cshtml" />
     <Content Include="Views\LR\Basicinfo.cshtml" />
     <Content Include="Views\LR\Pwdmanage.cshtml" />
+    <Content Include="Views\Goods\Creategoodsinfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

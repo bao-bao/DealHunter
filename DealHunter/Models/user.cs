@@ -14,6 +14,12 @@ namespace DealHunter.Models
     
     public partial class user
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public user()
+        {
+            this.goods = new HashSet<goods>();
+        }
+    
         public string uid { get; set; }
         public string upwd { get; set; }
         public string upincode { get; set; }
@@ -29,5 +35,8 @@ namespace DealHunter.Models
         public string udistrict { get; set; }
         public string ustreet { get; set; }
         public string uzipcode { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<goods> goods { get; set; }
     }
 }

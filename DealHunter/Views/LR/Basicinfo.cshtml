@@ -58,7 +58,7 @@
                                 alert("修改成功");
                             }
                             else {
-                                alert(result+"修改失败,请检测修改信息");
+                                alert("修改失败,请检查修改信息是否合法");
                             }
                         },
                         error: function (xhr) {
@@ -82,7 +82,7 @@
                             <a href="properties.html" class="fh5co-sub-ddown">交易</a>
                             <ul class="fh5co-sub-menu">
                                 <li><a href="#">大厅</a></li>
-                                <li><a href="#">发布</a></li>
+                                <li><a href='@Url.Action("Creategoodsinfo", "Goods")'>发布</a></li>
                             </ul>
                         </li>
                         <li class="active">
@@ -91,8 +91,8 @@
                                 <li class="active">
                                     <a href="#" class="fh5co-sub-ddown">个人</a>
                                     <ul class="fh5co-sub-menu">
-                                        <li><a href='@Url.Action("Basicinfo")'>基本信息</a></li>
-                                        <li><a href='@Url.Action("Pwdmanage")'>密码管理</a></li>
+                                        <li><a href='@Url.Action("Basicinfo", "LR")'>基本信息</a></li>
+                                        <li><a href='@Url.Action("Pwdmanage", "LR")'>密码管理</a></li>
                                     </ul>
                                 </li>
                                 <li class="active">
