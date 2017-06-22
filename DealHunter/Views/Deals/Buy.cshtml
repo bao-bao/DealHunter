@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DealHunter.Models.ExtendGood>
+﻿@model IEnumerable<DealModeldll.ExtendGood>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -52,9 +52,13 @@
                     success: function (result, status) {
                         if (result == "0") {
                             alert("取消成功");
+                            window.location = '@Url.Action("Buy")';
                         }
                         else if (result == "-1") {
                             alert("登录失效，请重新登陆");
+                        }
+                        else {
+                            alert("内部故障");
                         }
                     },
                     error: function (xhr) {
