@@ -183,34 +183,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BasicGood.cs" />
-    <Compile Include="Models\Deal.cs" />
-    <Compile Include="Models\ExtendGood.cs" />
-    <Compile Include="Models\DealsModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DealsModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DealsModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DealsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DealsModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DealsModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\goods.cs">
-      <DependentUpon>DealsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\purchase.cs">
-      <DependentUpon>DealsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\user.cs">
-      <DependentUpon>DealsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -263,28 +236,12 @@
     <Content Include="js\selectFx.js" />
     <Content Include="js\sticky.js" />
     <Content Include="js\superfish.js" />
-    <Content Include="Models\DealsModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DealsModel.edmx</DependentUpon>
-      <LastGenOutput>DealsModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DealsModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DealsModel.edmx</DependentUpon>
-      <LastGenOutput>DealsModel.cs</LastGenOutput>
-    </Content>
     <Content Include="css\.DS_Store" />
     <Content Include="css\style2.css.map" />
     <Content Include="images\.DS_Store" />
     <Content Include="js\.DS_Store" />
-    <EntityDeploy Include="Models\DealsModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DealsModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DealsModel.edmx.diagram">
-      <DependentUpon>DealsModel.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Views\Deals\Buy.cshtml" />
     <Content Include="Views\Deals\Search.cshtml" />
     <None Include="Views\Deals\Index.cshtml" />
