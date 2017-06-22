@@ -148,7 +148,10 @@ namespace DealHunter.Controllers
             ViewData["goodid"] = gid;
             try
             {
-                return View(DealsOp.statistics(db, min, max));
+                List<Deal> deals = DealsOp.filter(db, min, max);
+                ViewData["avgmin"] = DealsOp.getAvgMin(deals);     // 使用Com组件实现
+                ViewData["avgmax"] = DealsOp.getAvgMax(deals);     // 使用Com组件实现
+                return View(deals);
             }
             catch (Exception e)
             {

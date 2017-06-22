@@ -1,0 +1,38 @@
+// NumCalculatorCom.idl : NumCalculatorCom的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 产生类型库(NumCalculatorCom.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(F486BA11-988D-4424-8849-B78D1697505B),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface ICalculator : IDispatch{
+	[id(1)] HRESULT Add([in] LONG val1, [in] LONG val2, [out, retval] LONG* result);
+	[id(2)] HRESULT Sub([in] LONG val1, [in] LONG val2, [out, retval] LONG* result);
+	[id(3)] HRESULT Mul([in] LONG val1, [in] LONG val2, [out, retval] LONG* result);
+	[id(4)] HRESULT Div([in] LONG val1, [in] LONG val2, [out, retval] LONG* result);
+};
+[
+	uuid(73DA41E6-9152-4CDD-B06D-E58BAD314614),
+	version(1.0),
+]
+library NumCalculatorComLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(929E2E15-4304-42C6-9F73-A13FBDBE79DA)		
+	]
+	coclass Calculator
+	{
+		[default] interface ICalculator;
+	};
+};
+

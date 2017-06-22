@@ -15,6 +15,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlOperation", "SqlOperatio
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DbTransdll", "DbTransdll\DbTransdll.vcxproj", "{221C2B6A-65E1-4FD7-973A-44E0A5263A68}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NumCalculatorCom", "NumCalculatorCom\NumCalculatorCom.vcxproj", "{853BF8C4-DF52-4F08-9808-E5AB0B789A47}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NumCalculatorComPS", "NumCalculatorCom\NumCalculatorComPS.vcxproj", "{E2883934-DEF4-4190-A469-7567F7C43C1B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{853BF8C4-DF52-4F08-9808-E5AB0B789A47} = {853BF8C4-DF52-4F08-9808-E5AB0B789A47}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +102,22 @@ Global
 		{221C2B6A-65E1-4FD7-973A-44E0A5263A68}.Release|x64.Build.0 = Release|x64
 		{221C2B6A-65E1-4FD7-973A-44E0A5263A68}.Release|x86.ActiveCfg = Release|Win32
 		{221C2B6A-65E1-4FD7-973A-44E0A5263A68}.Release|x86.Build.0 = Release|Win32
+		{853BF8C4-DF52-4F08-9808-E5AB0B789A47}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{853BF8C4-DF52-4F08-9808-E5AB0B789A47}.Debug|x64.ActiveCfg = Debug|x64
+		{853BF8C4-DF52-4F08-9808-E5AB0B789A47}.Debug|x64.Build.0 = Debug|x64
+		{853BF8C4-DF52-4F08-9808-E5AB0B789A47}.Debug|x86.ActiveCfg = Debug|Win32
+		{853BF8C4-DF52-4F08-9808-E5AB0B789A47}.Debug|x86.Build.0 = Debug|Win32
+		{853BF8C4-DF52-4F08-9808-E5AB0B789A47}.Release|Any CPU.ActiveCfg = Release|Win32
+		{853BF8C4-DF52-4F08-9808-E5AB0B789A47}.Release|x64.ActiveCfg = Release|x64
+		{853BF8C4-DF52-4F08-9808-E5AB0B789A47}.Release|x64.Build.0 = Release|x64
+		{853BF8C4-DF52-4F08-9808-E5AB0B789A47}.Release|x86.ActiveCfg = Release|Win32
+		{853BF8C4-DF52-4F08-9808-E5AB0B789A47}.Release|x86.Build.0 = Release|Win32
+		{E2883934-DEF4-4190-A469-7567F7C43C1B}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{E2883934-DEF4-4190-A469-7567F7C43C1B}.Debug|x64.ActiveCfg = Debug|x64
+		{E2883934-DEF4-4190-A469-7567F7C43C1B}.Debug|x86.ActiveCfg = Debug|Win32
+		{E2883934-DEF4-4190-A469-7567F7C43C1B}.Release|Any CPU.ActiveCfg = Release|Win32
+		{E2883934-DEF4-4190-A469-7567F7C43C1B}.Release|x64.ActiveCfg = Release|x64
+		{E2883934-DEF4-4190-A469-7567F7C43C1B}.Release|x86.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

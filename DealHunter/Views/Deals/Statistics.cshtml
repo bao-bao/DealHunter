@@ -4,7 +4,9 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,8 +42,7 @@
     <script src="js/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
-        function statistic()
-        {
+        function statistic() {
             var goodslow = $("#deallow").val();
             if (goodslow != "") {
                 if (parseInt(goodslow) < 0 || parseInt(goodslow) > 2000000000) {
@@ -68,76 +69,120 @@
     </script>
 </head>
 <body>
-<div id="fh5co-wrapper">
-    <div id="fh5co-page">
+    <div id="fh5co-wrapper">
+        <div id="fh5co-page">
 
-        <header id="fh5co-header-section" class="sticky-banner">
-            <div class="container">
-                <div class="nav-header">
-                    <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-                    <h1 id="fh5co-logo"><a href="#"><i class="icon-home"></i>Deal<span>Hunter</span></a></h1>
-                    <nav id="fh5co-menu-wrap" role="navigation">
-                        <ul class="sf-menu" id="fh5co-primary-menu">
-                            <li class="active">
-                                <a href="#" class="fh5co-sub-ddown">交易</a>
-                                <ul class="fh5co-sub-menu">
-                                    <li><a href='@Url.Action("Index", "Deals")'>大厅</a></li>
-                                    <li><a href='@Url.Action("Creategoodsinfo", "Goods")'>发布</a></li>
-                                </ul>
-                            </li>
-                            <li class="active">
-                                <a href="#" class="fh5co-sub-ddown">我的</a>
-                                <ul class="fh5co-sub-menu">
-                                    <li class="active">
-                                        <a href="#" class="fh5co-sub-ddown">个人</a>
-                                        <ul class="fh5co-sub-menu">
-                                            <li><a href='@Url.Action("Basicinfo", "LR")'>基本信息</a></li>
-                                            <li><a href='@Url.Action("Pwdmanage", "LR")'>密码管理</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#" class="fh5co-sub-ddown">交易</a>
-                                        <ul class="fh5co-sub-menu">
-                                            <li><a href='@Url.Action("Sale", "Deals")'>我发布的</a></li>
-                                            <li><a href='@Url.Action("Buy", "Deals")'>我想要的</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href='@Url.Action("Logout", "LR")'>注销 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                        </ul>
-                    </nav>
+            <header id="fh5co-header-section" class="sticky-banner">
+                <div class="container">
+                    <div class="nav-header">
+                        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+                        <h1 id="fh5co-logo"><a href="#"><i class="icon-home"></i>Deal<span>Hunter</span></a></h1>
+                        <nav id="fh5co-menu-wrap" role="navigation">
+                            <ul class="sf-menu" id="fh5co-primary-menu">
+                                <li class="active">
+                                    <a href="#" class="fh5co-sub-ddown">交易</a>
+                                    <ul class="fh5co-sub-menu">
+                                        <li><a href='@Url.Action("Index", "Deals")'>大厅</a></li>
+                                        <li><a href='@Url.Action("Creategoodsinfo", "Goods")'>发布</a></li>
+                                    </ul>
+                                </li>
+                                <li class="active">
+                                    <a href="#" class="fh5co-sub-ddown">我的</a>
+                                    <ul class="fh5co-sub-menu">
+                                        <li class="active">
+                                            <a href="#" class="fh5co-sub-ddown">个人</a>
+                                            <ul class="fh5co-sub-menu">
+                                                <li><a href='@Url.Action("Basicinfo", "LR")'>基本信息</a></li>
+                                                <li><a href='@Url.Action("Pwdmanage", "LR")'>密码管理</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="active">
+                                            <a href="#" class="fh5co-sub-ddown">交易</a>
+                                            <ul class="fh5co-sub-menu">
+                                                <li><a href='@Url.Action("Sale", "Deals")'>我发布的</a></li>
+                                                <li><a href='@Url.Action("Buy", "Deals")'>我想要的</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href='@Url.Action("Logout", "LR")'>注销 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
 
-        <!-- end:header-top -->
+            <!-- end:header-top -->
 
-        <div id="fh5co-properties" class="fh5co-section-gray" style="padding: 0">
+            <div id="fh5co-properties" class="fh5co-section-gray" style="padding: 0">
 
-            <div id="fh5co-search-map" style="padding: 2em 0 2em 0">
-                <div class="search-property">
-                    <div class="s-holder">
-                        <h2>筛选</h2>
-                        <div class="row">
-                            <form>
-                                <div class="col-xxs-10 col-xs-10">
-                                    <section>
-                                        <label style="width: 15%">价格区间:</label>
-                                        <div class="wide" style="width: 85%; padding-right: 10%">
-                                            <div class="input-field" style="width: 45%;">
-                                                <input type="text" class="form-control" id="deallow" placeholder="最低价" style="width: 100%"/>
+                <div id="fh5co-search-map" style="padding: 2em 0 2em 0">
+                    <div class="search-property">
+                        <div class="s-holder">
+                            <h2>筛选</h2>
+                            <div class="row">
+                                <form>
+                                    <div class="col-xxs-10 col-xs-10">
+                                        <section>
+                                            <label style="width: 15%">价格区间:</label>
+                                            <div class="wide" style="width: 85%; padding-right: 10%">
+                                                <div class="input-field" style="width: 45%;">
+                                                    <input type="text" class="form-control" id="deallow" placeholder="最低价" style="width: 100%" />
+                                                </div>
+                                                <div class="input-field" style="width: 45%; margin-left: 10%">
+                                                    <input type="text" class="form-control" id="dealhigh" placeholder="最高价" style="width: 100%" />
+                                                </div>
                                             </div>
-                                            <div class="input-field" style="width: 45%; margin-left: 10%">
-                                                <input type="text" class="form-control" id="dealhigh" placeholder="最高价" style="width: 100%"/>
+                                        </section>
+                                    </div>
+                                    <div class="col-xxs-2 col-xs-2 text-center">
+                                        <p><a class="btn btn-primary btn-lg" href="javascript:void(0);" style="width: 100%; padding:10px 0 10px 0" onclick="statistic();">筛选</a></p>
+                                    </div>
+                                </form>
+                            </div>
+                            <h2>统计结果</h2>
+                            <div class="row">
+                                <div class="col-xxs-3 col-xs-3 text-center">
+                                    <section>
+                                        <label style="width: 40%">最低出价:</label>
+                                        <div class="wide" style="width: 60%; padding-right: 0%">
+                                            <div class="input-field" style="width: 100%;">
+                                                <input type="text" class="form-control" id="slow" style="width: 100%" disabled />
                                             </div>
                                         </div>
                                     </section>
                                 </div>
-                                <div class="col-xxs-2 col-xs-2 text-center">
-                                    <p><a class="btn btn-primary btn-lg" href="javascript:void(0);" style="width: 100%; padding:10px 0 10px 0" onclick="statistic();">筛选</a></p>
+                                <div class="col-xxs-3 col-xs-3 text-center">
+                                    <section>
+                                        <label style="width: 40%">最高出价:</label>
+                                        <div class="wide" style="width: 60%; padding-right: 0%">
+                                            <div class="input-field" style="width: 100%;">
+                                                <input type="text" class="form-control" id="shigh" style="width: 100%" disabled />
+                                            </div>
+                                        </div>
+                                    </section>
                                 </div>
-                            </form>
+                                <div class="col-xxs-3 col-xs-3 text-center">
+                                    <section>
+                                        <label style="width: 40%">平均最低出价:</label>
+                                        <div class="wide" style="width: 60%; padding-right: 0%">
+                                            <div class="input-field" style="width: 100%;">
+                                                <input type="text" class="form-control" id="alow" style="width: 100%" disabled value="@ViewData["avgmin"]"/>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-xxs-3 col-xs-3 text-center">
+                                    <section>
+                                        <label style="width: 40%">平均最高出价:</label>
+                                        <div class="wide" style="width: 60%; padding-right: 0%">
+                                            <div class="input-field" style="width: 100%;">
+                                                <input type="text" class="form-control" id="ahigh" style="width: 100%" disabled value="@ViewData["avgmax"]"/>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,7 +200,7 @@
                                         <i class="icon-browser"></i>
                                     </span>
                                     <div class="feature-copy">
-                                        <input hidden="hidden" value="'@deal.gid'" id="gid"/>
+                                        <input hidden="hidden" value="'@deal.gid'" id="gid" />
                                         <h3>@deal.low-@deal.high</h3>
                                         <p>@deal.uname</p>
                                         <p>@deal.des</p>
@@ -168,91 +213,88 @@
 
                 </div>
             </div>
-            </div>
         </div>
+    </div>
 
-        <footer>
-            <div id="footer">
-                <div class="container">
-                    <div class="row row-bottom-padded-md">
-                        <div class="col-md-3">
-                            <h3 class="section-title">About Homestate</h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>
-                        </div>
+    <footer>
+        <div id="footer">
+            <div class="container">
+                <div class="row row-bottom-padded-md">
+                    <div class="col-md-3">
+                        <h3 class="section-title">About Homestate</h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>
+                    </div>
 
-                        <div class="col-md-3 col-md-push-1">
-                            <h3 class="section-title">Links</h3>
-                            <ul>
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Properties</a></li>
-                                <li><a href="#">Agent</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">API</a></li>
-                                <li><a href="#">FAQ / Contact</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-md-3 col-md-push-1">
+                        <h3 class="section-title">Links</h3>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Properties</a></li>
+                            <li><a href="#">Agent</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">API</a></li>
+                            <li><a href="#">FAQ / Contact</a></li>
+                        </ul>
+                    </div>
 
-                        <div class="col-md-3">
-                            <h3 class="section-title">Information</h3>
-                            <ul>
-                                <li><a href="#">Terms &amp; Condition</a></li>
-                                <li><a href="#">License</a></li>
-                                <li><a href="#">Privacy &amp; Policy</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-3">
-                            <h3 class="section-title">Newsletter</h3>
-                            <p>Subscribe for our newsletter</p>
-                            <form class="form-inline" id="fh5co-header-subscribe">
-                                <div class="row">
-                                    <div class="col-md-12 col-md-offset-0">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="email" placeholder="Enter your email">
-                                            <button type="submit" class="btn btn-default"><i class="icon-paper-plane"></i></button>
-                                        </div>
+                    <div class="col-md-3">
+                        <h3 class="section-title">Information</h3>
+                        <ul>
+                            <li><a href="#">Terms &amp; Condition</a></li>
+                            <li><a href="#">License</a></li>
+                            <li><a href="#">Privacy &amp; Policy</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h3 class="section-title">Newsletter</h3>
+                        <p>Subscribe for our newsletter</p>
+                        <form class="form-inline" id="fh5co-header-subscribe">
+                            <div class="row">
+                                <div class="col-md-12 col-md-offset-0">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="email" placeholder="Enter your email">
+                                        <button type="submit" class="btn btn-default"><i class="icon-paper-plane"></i></button>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
 
 
     </div>
     <!-- END fh5co-page -->
-
-</div>
-<!-- END fh5co-wrapper -->
-
-<!-- jQuery -->
+    </div>
+    <!-- END fh5co-wrapper -->
+    <!-- jQuery -->
 
 
-<script src="~/js/jquery.min.js"></script>
-<!-- jQuery Easing -->
-<script src="~/js/jquery.easing.1.3.js"></script>
-<!-- Bootstrap -->
-<script src="~/js/bootstrap.min.js"></script>
-<!-- Waypoints -->
-<script src="~/js/jquery.waypoints.min.js"></script>
-<script src="~/js/sticky.js"></script>
-<!-- Superfish -->
-<script src="~/js/hoverIntent.js"></script>
-<script src="~/js/superfish.js"></script>
-<!-- Flexslider -->
-<script src="~/js/jquery.flexslider-min.js"></script>
-<!-- Date Picker -->
-<script src="~/js/bootstrap-datepicker.min.js"></script>
-<!-- CS Select -->
-<script src="~/js/classie.js"></script>
-<script src="~/js/selectFx.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="~/js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+    <script src="~/js/jquery.waypoints.min.js"></script>
+    <script src="~/js/sticky.js"></script>
+    <!-- Superfish -->
+    <script src="~/js/hoverIntent.js"></script>
+    <script src="~/js/superfish.js"></script>
+    <!-- Flexslider -->
+    <script src="~/js/jquery.flexslider-min.js"></script>
+    <!-- Date Picker -->
+    <script src="~/js/bootstrap-datepicker.min.js"></script>
+    <!-- CS Select -->
+    <script src="~/js/classie.js"></script>
+    <script src="~/js/selectFx.js"></script>
 
 
-<!-- Main JS -->
-<script src="~/js/main.js"></script>
+    <!-- Main JS -->
+    <script src="~/js/main.js"></script>
 
 </body>
 </html>
-

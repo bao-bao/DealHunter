@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DealModeldll;
 using System.Data.Entity;
+using NumCalculatorComLib;
 
 namespace SqlOperation
 {
@@ -228,7 +229,7 @@ namespace SqlOperation
             }
         }
 
-        public static List<Deal> statistics(DealsEntities db, string min, string max)
+        public static List<Deal> filter(DealsEntities db, string min, string max)
         {
             List<Deal> deals = new List<Deal>();
             try
@@ -264,6 +265,29 @@ namespace SqlOperation
                 Console.WriteLine(e.StackTrace);
             }
             return deals;
+        }
+
+        public static int getAvgMin(List<Deal> deals)
+        {
+            Calculator myCal = new Calculator();
+            int result = 0;
+            foreach(var deal in deals)
+            {
+                result = myCal.Add(result, deal.low);
+            }
+            result = myCal.Div(result, deals.Count);
+            return result;
+        }
+        public static int getAvgMax(List<Deal> deals)
+        {
+            Calculator myCal = new Calculator();
+            int result = 0;
+            foreach (var deal in deals)
+            {
+                result = myCal.Add(result, deal.high);
+            }
+            result = myCal.Div(result, deals.Count);
+            return result;
         }
     }
 }
