@@ -39,8 +39,9 @@
     <!--[if lt IE 9]>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-    <script>
-        function statis() {
+    <script type="text/javascript">
+        function statistic()
+        {
             var goodslow = $("#deallow").val();
             if (goodslow != "") {
                 if (parseInt(goodslow) < 0 || parseInt(goodslow) > 2000000000) {
@@ -61,21 +62,8 @@
                     return;
                 }
             }
-            $.ajax(
-                {
-                    url: '@Url.Action("Index")',
-                    type: "Post",
-                    dataType: "text",
-                    data: {
-                        "min": $("#deallow").val(),
-                        "max": $("#dealhigh").val()
-                    },
-                    success: function (result, status) {},
-                    error: function (xhr) {
-                        alert("错误" + xhr.responseText);
-                    }
-                }
-            );
+            var urlstr = '/Deals/Statistics?gid=' + @ViewData["goodid"] + '&min=' + goodslow + '&max=' + goodshigh;
+            window.location = urlstr;
         }
     </script>
 </head>
@@ -147,7 +135,7 @@
                                     </section>
                                 </div>
                                 <div class="col-xxs-2 col-xs-2 text-center">
-                                    <p><a class="btn btn-primary btn-lg" href="#" style="width: 100%; padding:10px 0 10px 0" onclick="statis()">筛选</a></p>
+                                    <p><a class="btn btn-primary btn-lg" href="javascript:void(0);" style="width: 100%; padding:10px 0 10px 0" onclick="statistic()">筛选</a></p>
                                 </div>
                             </form>
                         </div>
@@ -157,42 +145,27 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 animate-box">
-                        <div class="feature-left">
-							<span class="icon">
-								<i class="icon-browser"></i>
-							</span>
-                            <div class="feature-copy">
-                                <h3>Mortgage</h3>
-                                <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit.</p>
-                                <p><a href="#">Learn More</a></p>
+                    @{
+                        foreach (var deal in Model)
+                        {
+
+                            <div class="col-md-4 animate-box">
+                                <div class="feature-left">
+                                    <span class="icon">
+                                        <i class="icon-browser"></i>
+                                    </span>
+                                    <div class="feature-copy">
+                                        <input hidden="hidden" value="'@deal.gid'" id="gid"/>
+                                        <h3>@deal.low-@deal.high</h3>
+                                        <p>@deal.uname</p>
+                                        <p>@deal.des</p>
+                                        <p><a>@deal.mail    @deal.cellphone</a></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 animate-box">
-                        <div class="feature-left">
-							<span class="icon">
-								<i class="icon-browser"></i>
-							</span>
-                            <div class="feature-copy">
-                                <h3>Mortgage</h3>
-                                <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit.</p>
-                                <p><a href="#">Learn More</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 animate-box">
-                        <div class="feature-left">
-							<span class="icon">
-								<i class="icon-browser"></i>
-							</span>
-                            <div class="feature-copy">
-                                <h3>Mortgage</h3>
-                                <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit.</p>
-                                <p><a href="#">Learn More</a></p>
-                            </div>
-                        </div>
-                    </div>
+                        }
+                    }
+
                 </div>
             </div>
             </div>

@@ -47,60 +47,7 @@ namespace DealHunter.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string keyword, string type, string min, string max)
-        {
-            List<ExtendGood> goodsinfo = new List<ExtendGood>();
-            string sql = "select * from goods where 1=1";
-            if (keyword != "")
-            {
-                sql += " and (gname like '%" + keyword + "%' or gdes like '%" +
-                keyword + "%' or sid = (select uid form user where ucity like '%" + keyword +
-                "%' or  uprovince like '%" + keyword + "%' or ugender like '%" + keyword + "%' or uname like '%" +
-                keyword + "%')) and gstate = '1'";
-            }
-            if(type != "2")
-            {
-                sql += " and gtype = '" + type + "'";
-            }
-            if(min != "-1")
-            {
-                sql += " and ghigh >= " + min;
-            }
-            if(max != "-1")
-            {
-                sql += " and glow <= " + max;
-            }
-            Console.WriteLine(sql);
-            List<goods> goods = db.Database.SqlQuery<goods>(sql).ToList();
-            foreach(var good in goods)
-            {
-                user cuser = (from a in db.user where a.uid == good.sid select a).FirstOrDefault();
-                ExtendGood bg = new ExtendGood()
-                {
-                    gid = good.gid,
-                    sid = cuser.uid,
-                    gname = good.gname,
-                    glow = good.glow,
-                    ghigh = good.ghigh,
-                    gtype = good.gtype,
-                    gdes = good.gdes,
-                    uname = cuser.uname,
-                    ugender = cuser.ugender,
-                    umail = cuser.umail,
-                    uceilphone = cuser.uceilphone,
-                    uprovince = cuser.uprovince,
-                    ucity = cuser.ucity,
-                    udistrict = cuser.udistrict,
-                    ustreet = cuser.ustreet,
-                    uzipcode = cuser.uzipcode
-                };
-                goodsinfo.Add(bg);
-            }
-            return View(goodsinfo);
-        }
-
-        [HttpPost]
-        public string Index(string gid, string min, string max, string des, int x)
+        public string Index(int x, string gid, string min, string max, string des)
         {
             try
             {
@@ -237,6 +184,7 @@ namespace DealHunter.Controllers
                         ghigh = good.ghigh,
                         gstarttime = good.gstarttime.ToString()
                     };
+                    basics.Add(bg);
                 }
                 return View(basics);
             }
@@ -247,51 +195,13 @@ namespace DealHunter.Controllers
             }
         }
 
-        public ActionResult Statistics(string gid)
+        public ActionResult Statistics(string gid, string min, string max)
         {
-            try
-            {
-                if (gid == null)
-                {
-                    return RedirectToAction("Sale", "Deals");
-                }
-                goods cgood = db.goods.Where(u => u.gid == gid).Select(u => u).FirstOrDefault();
-                if (cgood == null)
-                {
-                    return RedirectToAction("Sale", "Deals");
-                }
-                List<Deal> deals = new List<Deal>();
-                List<purchase> purcs = db.purchase.Where(u => u.pgid == gid).Select(u => u).ToList();
-                foreach (var purc in purcs)
-                {
-                    user buser = db.user.Where(u => u.uid == purc.puid).Select(u => u).FirstOrDefault();
-                    Deal deal = new Deal()
-                    {
-                        low = purc.plow,
-                        high = purc.phigh,
-                        des = purc.pdes,
-                        uname = buser.uname,
-                        cellphone = buser.uceilphone,
-                        mail = buser.umail
-                    };
-                    deals.Add(deal);
-                }
-                return View(deals);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-                return RedirectToAction("Login", "LR");
-            }
-        }
-
-        [HttpPost]
-        public ActionResult Statistics(string min, string max)
-        {
+            ViewData["goodid"] = gid;
             try
             {
                 string sql = "select * from purchase where 1=1";
-                if(min != "")
+                if (min != "")
                 {
                     sql += " and phigh > " + min;
                 }
@@ -307,6 +217,7 @@ namespace DealHunter.Controllers
                     user buser = db.user.Where(u => u.uid == purc.puid).Select(u => u).FirstOrDefault();
                     Deal deal = new Deal()
                     {
+                        gid = purc.pgid,
                         low = purc.plow,
                         high = purc.phigh,
                         des = purc.pdes,

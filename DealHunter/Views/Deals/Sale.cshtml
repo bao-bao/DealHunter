@@ -39,7 +39,6 @@
     <!--[if lt IE 9]>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-
 </head>
 <body>
 <div id="fh5co-wrapper">
@@ -103,10 +102,11 @@
                                     <i class="icon-browser"></i>
                                 </span>
                                 <div class="feature-copy">
+                                    <input hidden="hidden" value="@good.gid" id="gid"/>
                                     <h3>@good.gname</h3>
                                     <p>@good.glow - @good.ghigh</p>
                                     <p>@good.gstarttime</p>
-                                    <p><a href="Deals/Statistics.cshtml?gid=@good.gid">Learn More</a></p>
+                                    <p><a href="@Url.Action("Statistics")?gid=@good.gid&min=&max=">Learn More</a></p>
                                 </div>
                             </div>
                         </div>

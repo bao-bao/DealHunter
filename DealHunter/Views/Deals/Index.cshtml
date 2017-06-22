@@ -73,11 +73,11 @@
                         type: "Post",
                         dataType: "text",
                         data: {
+                            "x": 0,
                             "gid": $("#good_id").val(),
                             "min": $("#deallow").val(),
                             "max": $("#dealhigh").val(),
-                            "des": $("#dealdes").val(),
-                            "x": 0
+                            "des": $("#dealdes").val()
                         },
                         success: function (result, status) {
                             if (result == "0") {
@@ -255,7 +255,7 @@
                                     <span class="address" style="border-top: none"><i class="icon-envelope"></i>@good.uzipcode</span>
                                 </div>
                                 <span class="status">Sale</span>
-                                <img class="status2" src="../../images/arrow.svg" onclick="$('#myModal').modal(); document.getElementById('good_id').value = @good.gid"/>
+                                <img class="status2" src="../../images/arrow.svg" onclick="$('#myModal').modal(); document.getElementById('good_id').value = '@good.gid'"/>
                                 <ul class="list-details">
                                     <li>@good.uname&nbsp;&nbsp;@good.ugender</li>
                                     <li>@good.uceilphone</li>
@@ -326,7 +326,7 @@
                         <h4 class="modal-title" id="myModalLabel">买买买！！！</h4>
                     </div>
                     <form class="fh5co-form" style="opacity: 0.8; border-radius: 10px; margin:0 0 0 0; padding: 0 0 0 0">
-                        <input hidden="hidden" id="good_id" name="gid" value="" />
+                        <input hidden="hidden" type="text" id="good_id" name="gid" value="" />
                         <div class="form-group col-lg-10 col-lg-offset-1" style="margin-top: 1em">
                             <label style="display:block; font-size: 16px; color: #0b0b0b">价格区间</label>
                             <input type="number" class="form-control" id="deallow" name="min" value="" placeholder="最低价" style="padding: 0 0 0 0; width: 45%; margin-left: 9%; display: inline-block" />

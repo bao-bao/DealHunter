@@ -7,6 +7,7 @@ namespace DealHunter.Models
 {
     public class Deal
     {
+        public string gid { get; set; }
         public string uname { get; set; }
         public int low { get; set; }
         public int high { get; set; }
