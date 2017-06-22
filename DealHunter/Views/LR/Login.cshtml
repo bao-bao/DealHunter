@@ -29,7 +29,7 @@
                     success: function (data, status) {
                         if (data == "1") {
                             alert("登录成功");
-                            window.location = '@Url.Action("Basicinfo")';
+                            window.location = '@Url.Action("Index", "Deals")';
                         }
                         else if (data == "-1") {
                             alert("账号不存在");
@@ -47,12 +47,8 @@
                 }
             );
         }
-        function toregister() {
-            $("#toregister").click(
-                function () {
+        function toregist() {
                     window.location = '@Url.Action("Register")';
-                }
-            )
         }
     </script>
 </head>
@@ -75,7 +71,7 @@
                         <input type="button" id="loginbtn" value="登录" class="form-control btn btn-primary" style="background-color: #2b542c; border-radius: 10px" onclick="login();">
                     </div>
                     <div class="form-group">
-                        <input type="button" id="toregister" value="注册" class="form-control btn btn-primary" style="background-color: #2b542c; border-radius: 10px" onclick="toregister();">
+                        <input type="button" id="toregister" value="注册" class="form-control btn btn-primary" style="background-color: #2b542c; border-radius: 10px" onclick="toregist();">
                     </div>
                 </form>
             </div>
