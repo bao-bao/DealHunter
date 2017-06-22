@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DealHunter.Models
+namespace DealModeldll
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class GoodsEntities : DbContext
+    public partial class DealsEntities : DbContext
     {
-        public GoodsEntities()
-            : base("name=GoodsEntities")
+        public DealsEntities()
+            : base("name=DealsEntities")
         {
         }
     
@@ -26,6 +26,7 @@ namespace DealHunter.Models
         }
     
         public virtual DbSet<goods> goods { get; set; }
+        public virtual DbSet<purchase> purchase { get; set; }
         public virtual DbSet<user> user { get; set; }
     }
 }

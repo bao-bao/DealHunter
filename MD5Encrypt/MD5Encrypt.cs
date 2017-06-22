@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
+using System.Threading.Tasks;
 
-namespace DealHunter.Models
+namespace MD5Encrypt
 {
     public static class MD5Encrypt
     {

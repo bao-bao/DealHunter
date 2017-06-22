@@ -1,4 +1,4 @@
-﻿using DealHunter.Models;
+﻿using DealModeldll;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -11,7 +11,7 @@ namespace DealHunter.Controllers
 {
     public class GoodsController : Controller
     {
-        private GoodsEntities db = new GoodsEntities();
+        private DealsEntities db = new DealsEntities();
         public ActionResult Creategoodsinfo()
         {
             try
@@ -21,7 +21,7 @@ namespace DealHunter.Controllers
                 {
                     return RedirectToAction("Login", "LR");
                 }
-                user cuser = db.user.Where(u => u.uid == cid).Select(u => u).FirstOrDefault();
+                user cuser = EFOperationdll.PersonOp.getAllInfo(db, cid);
                 if (cuser == null)
                 {
                     return RedirectToAction("Login", "LR");
@@ -45,7 +45,7 @@ namespace DealHunter.Controllers
                 {
                     return "-1";
                 }
-                user cuser = db.user.Where(u => u.uid == cid).Select(u => u).FirstOrDefault();
+                user cuser = EFOperationdll.PersonOp.getAllInfo(db, cid);
                 if (cuser == null)
                 {
                     return "-1";
@@ -62,9 +62,7 @@ namespace DealHunter.Controllers
                     gstate = "1",
                     gstarttime = DateTime.Now
                 };
-                db.goods.Add(newgoods);
-                db.SaveChanges();
-                return "1";
+                return EFOperationdll.GoodsOp.addGoods(db, newgoods);
             }
             catch (Exception e)
             {

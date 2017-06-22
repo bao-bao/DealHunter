@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GoodsModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DealsModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="goods">
           <Key>
             <PropertyRef Name="gid" />
@@ -18,6 +18,18 @@
           <Property Name="gdes" Type="varchar" MaxLength="8192" Nullable="false" />
           <Property Name="gstate" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="gstarttime" Type="timestamp" Precision="0" StoreGeneratedPattern="None" Nullable="false" />
+        </EntityType>
+        <EntityType Name="purchase">
+          <Key>
+            <PropertyRef Name="pgid" />
+            <PropertyRef Name="puid" />
+          </Key>
+          <Property Name="pgid" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="puid" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="plow" Type="int" Nullable="false" />
+          <Property Name="phigh" Type="int" Nullable="false" />
+          <Property Name="pdes" Type="varchar" MaxLength="1024" Nullable="false" />
+          <Property Name="pstate" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -53,19 +65,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="GoodsModelStoreContainer">
+        <Association Name="purchasepgidfk">
+          <End Role="goods" Type="Self.goods" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="gid" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="pgid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchasepuidfk">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="puid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DealsModelStoreContainer">
           <EntitySet Name="goods" EntityType="Self.goods" Schema="dealhunter" store:Type="Tables" />
+          <EntitySet Name="purchase" EntityType="Self.purchase" Schema="dealhunter" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dealhunter" store:Type="Tables" />
           <AssociationSet Name="goodsidfk" Association="Self.goodsidfk">
             <End Role="user" EntitySet="user" />
             <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="purchasepgidfk" Association="Self.purchasepgidfk">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="purchase" EntitySet="purchase" />
+          </AssociationSet>
+          <AssociationSet Name="purchasepuidfk" Association="Self.purchasepuidfk">
+            <End Role="user" EntitySet="user" />
+            <End Role="purchase" EntitySet="purchase" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="GoodsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DealsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="goods">
           <Key>
             <PropertyRef Name="gid" />
@@ -80,6 +129,21 @@
           <Property Name="gstate" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="gstarttime" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <NavigationProperty Name="user" Relationship="Self.goodsidfk" FromRole="goods" ToRole="user" />
+          <NavigationProperty Name="purchase" Relationship="Self.purchasepgidfk" FromRole="goods" ToRole="purchase" />
+        </EntityType>
+        <EntityType Name="purchase">
+          <Key>
+            <PropertyRef Name="pgid" />
+            <PropertyRef Name="puid" />
+          </Key>
+          <Property Name="pgid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="puid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="plow" Type="Int32" Nullable="false" />
+          <Property Name="phigh" Type="Int32" Nullable="false" />
+          <Property Name="pdes" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pstate" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="goods" Relationship="Self.purchasepgidfk" FromRole="purchase" ToRole="goods" />
+          <NavigationProperty Name="user" Relationship="Self.purchasepuidfk" FromRole="purchase" ToRole="user" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -101,6 +165,7 @@
           <Property Name="ustreet" Type="String" MaxLength="96" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="uzipcode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="goods" Relationship="Self.goodsidfk" FromRole="user" ToRole="goods" />
+          <NavigationProperty Name="purchase" Relationship="Self.purchasepuidfk" FromRole="user" ToRole="purchase" />
         </EntityType>
         <Association Name="goodsidfk">
           <End Role="user" Type="Self.user" Multiplicity="1">
@@ -116,12 +181,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="GoodsEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="purchasepgidfk">
+          <End Role="goods" Type="Self.goods" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="gid" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="pgid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchasepuidfk">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="puid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DealsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="goods" EntityType="Self.goods" />
+          <EntitySet Name="purchase" EntityType="Self.purchase" />
           <EntitySet Name="user" EntityType="Self.user" />
           <AssociationSet Name="goodsidfk" Association="Self.goodsidfk">
             <End Role="user" EntitySet="user" />
             <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="purchasepgidfk" Association="Self.purchasepgidfk">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="purchase" EntitySet="purchase" />
+          </AssociationSet>
+          <AssociationSet Name="purchasepuidfk" Association="Self.purchasepuidfk">
+            <End Role="user" EntitySet="user" />
+            <End Role="purchase" EntitySet="purchase" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -129,9 +231,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GoodsModelStoreContainer" CdmEntityContainer="GoodsEntities">
+        <EntityContainerMapping StorageEntityContainer="DealsModelStoreContainer" CdmEntityContainer="DealsEntities">
           <EntitySetMapping Name="goods">
-            <EntityTypeMapping TypeName="GoodsModel.goods">
+            <EntityTypeMapping TypeName="DealsModel.goods">
               <MappingFragment StoreEntitySet="goods">
                 <ScalarProperty Name="gid" ColumnName="gid" />
                 <ScalarProperty Name="sid" ColumnName="sid" />
@@ -145,8 +247,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="purchase">
+            <EntityTypeMapping TypeName="DealsModel.purchase">
+              <MappingFragment StoreEntitySet="purchase">
+                <ScalarProperty Name="pgid" ColumnName="pgid" />
+                <ScalarProperty Name="puid" ColumnName="puid" />
+                <ScalarProperty Name="plow" ColumnName="plow" />
+                <ScalarProperty Name="phigh" ColumnName="phigh" />
+                <ScalarProperty Name="pdes" ColumnName="pdes" />
+                <ScalarProperty Name="pstate" ColumnName="pstate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="user">
-            <EntityTypeMapping TypeName="GoodsModel.user">
+            <EntityTypeMapping TypeName="DealsModel.user">
               <MappingFragment StoreEntitySet="user">
                 <ScalarProperty Name="uid" ColumnName="uid" />
                 <ScalarProperty Name="upwd" ColumnName="upwd" />
