@@ -13,6 +13,7 @@ namespace DealModeldll
         public int glow { get; set; }
         public int ghigh { get; set; }
         public string gstarttime { get; set; }
+        public string gstate { get; set; }
     }
 
     public class Deal
