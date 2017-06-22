@@ -106,8 +106,8 @@
                     type: "Post",
                     dataType: "text",
                     data: {
-                        "keyword": $("#from-place").val(),
-                        "type": $("#dealtype").val(),
+                        "gid": $("#from-place").val(),
+                        "des": $("#dealtype").val(),
                         "min": $("#searchlow").val(),
                         "max": $("#searchhigh").val()
                     },
@@ -191,7 +191,7 @@
                 <div class="s-holder">
                     <h2>Hunting</h2>
                     <div class="row">
-                        <form class="fh5co-form animate-box" data-animate-effect="fadeIn">
+                        <form class="animate-box" data-animate-effect="fadeIn">
                             <div class="col-xxs-10 col-xs-10">
                                 <div class="input-field">
                                     <label style="width: 15%">关键字:</label>
@@ -199,7 +199,7 @@
                                 </div>
                             </div>
                             <div class="col-xxs-2 col-xs-2 text-center">
-                                <p><a class="btn btn-primary btn-lg" href="#" style="width: 100%; padding:10px 0 10px 0" onclick="sreach()">搜索</a></p>
+                                <p><a class="btn btn-primary btn-lg" href="javascript:void(0);" style="width: 100%; padding:10px 0 10px 0" onclick="sreach()">搜索</a></p>
                             </div>
                             <div class="col-xxs-6 col-xs-6">
                                 <section>

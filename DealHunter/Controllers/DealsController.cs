@@ -47,37 +47,52 @@ namespace DealHunter.Controllers
         }
 
         [HttpPost]
-        public string Index(int x, string gid, string min, string max, string des)
+        public string Index(string gid, string min, string max, string des)
         {
-            try
+            String cid = (String)Session["uid"];
+            if (cid == null)
             {
-                String cid = (String)Session["uid"];
-                if (cid == null)
-                {
-                    return "-1";
-                }
-                user cuser = db.user.Where(u => u.uid == cid).Select(u => u).FirstOrDefault();
-                if (cuser == null)
-                {
-                    return "-1";
-                }
-                purchase newpurchase = new purchase()
-                {
-                    pgid = gid,
-                    puid = cid,
-                    plow = int.Parse(min),
-                    phigh = int.Parse(max),
-                    pdes = des,
-                    pstate = "1",
-                };
-                db.purchase.Add(newpurchase);
-                db.SaveChanges();
-                return "0";
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
                 return "-1";
+            }
+            user cuser = db.user.Where(u => u.uid == cid).Select(u => u).FirstOrDefault();
+            if (cuser == null)
+            {
+                return "-1";
+            }
+            if (gid.Length == 20)
+            {
+                try
+                {
+                    purchase newpurchase = new purchase()
+                    {
+                        pgid = gid,
+                        puid = cid,
+                        plow = int.Parse(min),
+                        phigh = int.Parse(max),
+                        pdes = des,
+                        pstate = "1",
+                    };
+                    db.purchase.Add(newpurchase);
+                    db.SaveChanges();
+                    return "0";
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    return "-1";
+                }
+            }
+            else
+            {
+                try
+                {
+                    // search
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    return "-1";
+                }
             }
         }
        

@@ -266,6 +266,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\arrow.svg" />
+    <Content Include="images\ban.svg" />
     <Content Include="images\basicinfo.png" />
     <Content Include="images\bg_2.jpg" />
     <Content Include="images\createdeal.png" />
