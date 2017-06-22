@@ -52,6 +52,7 @@
                     success: function (result, status) {
                         if (result == "0") {
                             alert("取消成功");
+                            window.location = '@Url.Action("Buy")';
                         }
                         else if (result == "-1") {
                             alert("登录失效，请重新登陆");

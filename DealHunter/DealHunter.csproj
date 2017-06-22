@@ -277,6 +277,8 @@
     <Content Include="images\pwdmanage.png" />
     <Content Include="images\register.png" />
     <Content Include="images\starve.png" />
+    <Content Include="images\red.png" />
+    <Content Include="images\green.png" />
     <Content Include="js\bootstrap-datepicker.min.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\classie.js" />
@@ -349,6 +351,7 @@
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Views\Deals\Buy.cshtml" />
+    <Content Include="Views\Deals\Search.cshtml" />
     <None Include="Views\Deals\Index.cshtml" />
     <None Include="Views\Deals\Sale.cshtml" />
     <None Include="Views\Deals\Statistics.cshtml" />

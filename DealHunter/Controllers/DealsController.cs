@@ -14,11 +14,11 @@ namespace DealHunter.Controllers
     {
         private DealsEntities db = new DealsEntities();
 
-            // GET: all goods
-            public ActionResult Index()
+        // GET: all goods
+        public ActionResult Index()
         {
             List<ExtendGood> goodsinfo = new List<ExtendGood>();
-            List<goods> goods = db.goods.Select(u => u).ToList();
+            List<goods> goods = db.goods.Where(u => u.gstate == "1").Select(u => u).ToList();
             foreach (var good in goods)
             {
                 user cuser = (from a in db.user where a.uid == good.sid select a).FirstOrDefault();
@@ -46,56 +46,99 @@ namespace DealHunter.Controllers
             return View(goodsinfo);
         }
 
+        public ActionResult Search(string keyword, string type, string min, string max)
+        {
+            try
+            {
+                List<ExtendGood> goodsinfo = new List<ExtendGood>();
+                string sql = "select * from goods where gstate = '1'";
+                if (keyword != "")
+                {
+                    sql += " and (gname like '%" + keyword + "%' or gdes like '%" +
+                    keyword + "%')";
+                }
+                if (type != "2")
+                {
+                    sql += " and gtype = '" + type + "'";
+                }
+                if (min != "")
+                {
+                    sql += " and ghigh >= " + min;
+                }
+                if (max != "")
+                {
+                    sql += " and glow <= " + max;
+                }
+                Console.WriteLine(sql);
+                List<goods> goods = db.Database.SqlQuery<goods>(sql).ToList();
+                foreach (var good in goods)
+                {
+                    user us = (from a in db.user where a.uid == good.sid select a).FirstOrDefault();
+                    ExtendGood bg = new ExtendGood()
+                    {
+                        gid = good.gid,
+                        sid = us.uid,
+                        gname = good.gname,
+                        glow = good.glow,
+                        ghigh = good.ghigh,
+                        gtype = good.gtype,
+                        gdes = good.gdes,
+                        uname = us.uname,
+                        ugender = us.ugender,
+                        umail = us.umail,
+                        uceilphone = us.uceilphone,
+                        uprovince = us.uprovince,
+                        ucity = us.ucity,
+                        udistrict = us.udistrict,
+                        ustreet = us.ustreet,
+                        uzipcode = us.uzipcode
+                    };
+                    goodsinfo.Add(bg);
+                }
+                return View(goodsinfo);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return RedirectToAction("Index");
+            }
+        }
+
         [HttpPost]
-        public string Index(string gid, string min, string max, string des)
+        public ActionResult Index(int x, string gid, string min, string max, string des)
         {
             String cid = (String)Session["uid"];
             if (cid == null)
             {
-                return "-1";
+                return RedirectToAction("Index");
             }
             user cuser = db.user.Where(u => u.uid == cid).Select(u => u).FirstOrDefault();
             if (cuser == null)
             {
-                return "-1";
+                return RedirectToAction("Index");
             }
-            if (gid.Length == 20)
+            try
             {
-                try
+                purchase newpurchase = new purchase()
                 {
-                    purchase newpurchase = new purchase()
-                    {
-                        pgid = gid,
-                        puid = cid,
-                        plow = int.Parse(min),
-                        phigh = int.Parse(max),
-                        pdes = des,
-                        pstate = "1",
-                    };
-                    db.purchase.Add(newpurchase);
-                    db.SaveChanges();
-                    return "0";
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.StackTrace);
-                    return "-1";
-                }
+                    pgid = gid,
+                    puid = cid,
+                    plow = int.Parse(min),
+                    phigh = int.Parse(max),
+                    pdes = des,
+                    pstate = "1",
+                };
+                db.purchase.Add(newpurchase);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            else
+            catch (Exception e)
             {
-                try
-                {
-                    // search
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.StackTrace);
-                    return "-1";
-                }
+                Console.WriteLine(e.StackTrace);
+                return RedirectToAction("Index");
             }
         }
-       
+
         public ActionResult Buy()
         {
             try
@@ -112,7 +155,7 @@ namespace DealHunter.Controllers
                 }
                 List<ExtendGood> goods = new List<ExtendGood>();
                 List<purchase> purchases = (from a in db.purchase where a.puid == cuser.uid select a).ToList();
-                foreach(var purc in purchases)
+                foreach (var purc in purchases)
                 {
                     goods good = (from a in db.goods where a.gid == purc.pgid select a).FirstOrDefault();
                     user u = (from a in db.user where a.uid == purc.puid select a).FirstOrDefault();
@@ -188,8 +231,8 @@ namespace DealHunter.Controllers
                     return RedirectToAction("Login", "LR");
                 }
                 List<BasicGood> basics = new List<BasicGood>();
-                List<goods> goods = (from a in db.goods where a.sid == cuser.uid && a.gstate == "1" select a).ToList();
-                foreach(var good in goods)
+                List<goods> goods = (from a in db.goods where a.sid == cuser.uid select a).ToList();
+                foreach (var good in goods)
                 {
                     BasicGood bg = new BasicGood()
                     {
@@ -197,7 +240,8 @@ namespace DealHunter.Controllers
                         gname = good.gname,
                         glow = good.glow,
                         ghigh = good.ghigh,
-                        gstarttime = good.gstarttime.ToString()
+                        gstarttime = good.gstarttime.ToString(),
+                        gstate = good.gstate
                     };
                     basics.Add(bg);
                 }
@@ -207,6 +251,25 @@ namespace DealHunter.Controllers
             {
                 Console.WriteLine(e.StackTrace);
                 return RedirectToAction("Login", "LR");
+            }
+        }
+
+        [HttpPost]
+        public string Sale(string gid, string state)
+        {
+            try
+            {
+                goods good = (from a in db.goods where a.gid == gid select a).FirstOrDefault();
+                good.gstate = state == "1" ? "2": "1";
+                db.goods.Attach(good);
+                db.Entry(good).State = EntityState.Modified;
+                db.SaveChanges();
+                return "0";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return "-1";
             }
         }
 
