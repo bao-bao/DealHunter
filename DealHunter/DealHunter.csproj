@@ -204,38 +204,7 @@
     <Compile Include="Models\goods.cs">
       <DependentUpon>DealsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GoodsModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GoodsModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GoodsModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GoodsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GoodsModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GoodsModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\LRModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LRModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LRModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LRModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LRModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LRModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MD5Encrypt.cs" />
     <Compile Include="Models\purchase.cs">
       <DependentUpon>DealsModel.tt</DependentUpon>
     </Compile>
@@ -300,44 +269,10 @@
       <DependentUpon>DealsModel.edmx</DependentUpon>
       <LastGenOutput>DealsModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\GoodsModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GoodsModel.edmx</DependentUpon>
-      <LastGenOutput>GoodsModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\GoodsModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GoodsModel.edmx</DependentUpon>
-      <LastGenOutput>GoodsModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\LRModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LRModel.edmx</DependentUpon>
-      <LastGenOutput>LRModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\LRModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LRModel.edmx</DependentUpon>
-      <LastGenOutput>LRModel.cs</LastGenOutput>
-    </Content>
     <Content Include="css\.DS_Store" />
     <Content Include="css\style2.css.map" />
     <Content Include="images\.DS_Store" />
     <Content Include="js\.DS_Store" />
-    <EntityDeploy Include="Models\LRModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LRModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\LRModel.edmx.diagram">
-      <DependentUpon>LRModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\GoodsModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GoodsModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\GoodsModel.edmx.diagram">
-      <DependentUpon>GoodsModel.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\DealsModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DealsModel.Designer.cs</LastGenOutput>
@@ -382,9 +317,21 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DealModeldll\DealModeldll.csproj">
+      <Project>{06fd79f2-b158-4c8a-9a10-486e8f76ae22}</Project>
+      <Name>DealModeldll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFOperationdll\EFOperationdll.csproj">
+      <Project>{b864dde1-865e-4faa-accb-cf5979322098}</Project>
+      <Name>EFOperationdll</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MD5Encrypt\MD5Encryptdll.csproj">
       <Project>{ceac4356-365c-4d01-9c68-bba8e2227fad}</Project>
       <Name>MD5Encryptdll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlOperation\SqlOperation.csproj">
+      <Project>{68913ad4-c3ea-4a9b-aa35-696af6d729c7}</Project>
+      <Name>SqlOperation</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

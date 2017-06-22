@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DealHunter.Models;
+using DealModeldll;
 using System.Data.Entity.Validation;
 using System.Text;
 using System.Data.Entity.Infrastructure;
@@ -13,45 +13,10 @@ namespace DealHunter.Controllers
 {
     public class LRController : Controller
     {
-        public class basicinfouser
-        {
-            public String uid { set; get; }
-            public String uname { set; get; }
-            public String ugender { set; get; }
-            public int uage { set; get; }
-            public String ucareer { set; get; }
-            public String umail { set; get; }
-            public String utelephone { set; get; }
-            public String uceilphone { set; get; }
-            public String uprovince { set; get; }
-            public String ucity { set; get; }
-            public String udistrict { set; get; }
-            public String ustreet { set; get; }
-            public String uzipcode { set; get; }
-
-            public basicinfouser()
-            {
-                this.uid = "";
-                this.uname = "";
-                this.ugender = "";
-                this.uage = 0;
-                this.ucareer = "";
-                this.umail = "";
-                this.utelephone = "";
-                this.uceilphone = "";
-                this.uprovince = "";
-                this.ucity = "";
-                this.udistrict = "";
-                this.ustreet = "";
-                this.uzipcode = "";
-            }
-        }
-
-        private LREntities db = new LREntities();
+        private DealsEntities db = new DealsEntities();
         // GET: LR
         public ActionResult Login()
         {
-
             return View();
         }
         [HttpPost]
@@ -59,7 +24,7 @@ namespace DealHunter.Controllers
         {
             try
             {
-                var upwd = db.user.Where(u => u.uid == loginid).Select(u => u.upwd).FirstOrDefault();
+                var upwd = EFOperationdll.PersonOp.getPwd(db, loginid);
                 if (upwd == null)
                 {
                     return "-1";
@@ -106,17 +71,7 @@ namespace DealHunter.Controllers
             registeruser.ustreet = "";
             registeruser.uzipcode = "";
 
-            try
-            {
-                db.user.Add(registeruser);
-                db.SaveChanges();
-                return "1";
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-                return "0";
-            }
+            return EFOperationdll.PersonOp.addUser(db, registeruser);
         }
 
         public ActionResult Basicinfo()
@@ -128,7 +83,7 @@ namespace DealHunter.Controllers
                 {
                     return RedirectToAction("Login", "LR");
                 }
-                basicinfouser buser = db.user.Where(u => u.uid == basicid).Select(u => new basicinfouser() { uid = u.uid, uname = u.uname, ugender = u.ugender, uage = u.uage, ucareer = u.ucareer, umail = u.umail, utelephone = u.utelephone, uceilphone = u.uceilphone, uprovince = u.uprovince, ucity = u.ucity, udistrict = u.udistrict, ustreet = u.ustreet, uzipcode = u.uzipcode }).FirstOrDefault();
+                basicinfouser buser = EFOperationdll.PersonOp.getBasicInfo(db, basicid);
                 if (buser == null)
                 {
                     return RedirectToAction("Login", "LR");
@@ -165,22 +120,8 @@ namespace DealHunter.Controllers
                     ustreet = basicstreet,
                     uzipcode = basiczipcode
                 };
-                DbEntityEntry<user> entry = db.Entry<user>(modifyuser);
-                entry.State = EntityState.Unchanged;
-                entry.Property(t => t.uname).IsModified = true;
-                entry.Property(t => t.ugender).IsModified = true;
-                entry.Property(t => t.uage).IsModified = true;
-                entry.Property(t => t.ucareer).IsModified = true;
-                entry.Property(t => t.umail).IsModified = true;
-                entry.Property(t => t.utelephone).IsModified = true;
-                entry.Property(t => t.uceilphone).IsModified = true;
-                entry.Property(t => t.uprovince).IsModified = true;
-                entry.Property(t => t.ucity).IsModified = true;
-                entry.Property(t => t.udistrict).IsModified = true;
-                entry.Property(t => t.ustreet).IsModified = true;
-                entry.Property(t => t.uzipcode).IsModified = true;
-                db.SaveChanges();
-                return "1";
+
+                return EFOperationdll.PersonOp.updateBasicInfo(db, modifyuser);
             }
             catch (Exception e)
             {
@@ -198,7 +139,7 @@ namespace DealHunter.Controllers
                 {
                     return RedirectToAction("Login", "LR");
                 }
-                basicinfouser buser = db.user.Where(u => u.uid == basicid).Select(u => new basicinfouser() { uid = u.uid, uname = u.uname, ugender = u.ugender, uage = u.uage, ucareer = u.ucareer, umail = u.umail, utelephone = u.utelephone, uceilphone = u.uceilphone, uprovince = u.uprovince, ucity = u.ucity, udistrict = u.udistrict, ustreet = u.ustreet, uzipcode = u.uzipcode }).FirstOrDefault();
+                basicinfouser buser = EFOperationdll.PersonOp.getBasicInfo(db, basicid);
                 if (buser == null)
                 {
                     return RedirectToAction("Login", "LR");
@@ -222,7 +163,7 @@ namespace DealHunter.Controllers
                 {
                     return "-1";
                 }
-                user puser = db.user.Where(u => u.uid == pwdid).Select(u => u).FirstOrDefault();
+                user puser = EFOperationdll.PersonOp.getAllInfo(db, pwdid);
                 if (puser == null)
                 {
                     return "-1";
@@ -232,10 +173,8 @@ namespace DealHunter.Controllers
                     return "-2";
                 }
                 puser.upwd = MD5Encrypt.MD5Encrypt.GetMd5(newpwd);
-                db.user.Attach(puser);
-                db.Entry(puser).State = EntityState.Modified;
-                db.SaveChanges();
-                return "1";
+
+                return EFOperationdll.PersonOp.updatePwd(db, puser);
             }
             catch (Exception e)
             {
