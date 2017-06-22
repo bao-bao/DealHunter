@@ -1,0 +1,384 @@
+﻿@model IEnumerable<DealHunter.Models.ExtendGood>
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Deal Hunter</title>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,300' rel='stylesheet' type='text/css'>
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Superfish -->
+    <link rel="stylesheet" href="css/superfish.css">
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="css/flexslider.css">
+    <!-- CS Select -->
+    <link rel="stylesheet" href="css/cs-select.css">
+    <link rel="stylesheet" href="css/cs-skin-border.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal-form.css">
+
+
+    <!-- Modernizr JS -->
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+            function deal()
+            {
+                var goodslow = $("#deallow").val();
+                if (goodslow == "")
+                {
+                    alert("请输入最低价");
+                    return;
+                }
+                else if (parseInt(goodslow) < 0 || parseInt(goodslow) > 2000000000)
+                {
+                    alert("最低价取值应在0-2000000000之间");
+                    return;
+                }
+                var goodshigh = $("#dealhigh").val();
+                if (goodshigh == "") {
+                    alert("请输入最高价");
+                    return;
+                }
+                else if (parseInt(goodshigh) < 0 || parseInt(goodshigh) > 2000000000) {
+                    alert("最高价取值应在0-2000000000之间");
+                    return;
+                }
+                if (parseInt(goodslow) > parseInt(goodshigh))
+                {
+                    alert("最低价应不高于最高价");
+                    return;
+                }
+                $.ajax(
+                    {
+                        url: '@Url.Action("Index")',
+                        type: "Post",
+                        dataType: "text",
+                        data: {
+                            "gid": $("#good_id").val(),
+                            "min": $("#deallow").val(),
+                            "max": $("#dealhigh").val(),
+                            "des": $("#dealdes").val(),
+                            "x": 0
+                        },
+                        success: function (result, status) {
+                            if (result == "0") {
+                                alert("下单成功");
+                            }
+                            else if (result == "-1")
+                            {
+                                alert("登录失效，请重新登陆");
+                            }
+                            else {
+                                alert("发布失败,请检查交易信息是否合法");
+                            }
+                        },
+                        error: function (xhr) {
+                            alert("错误" + xhr.responseText);
+                        }
+                    }
+                );
+            }
+
+        function search()
+        {
+            $.ajax(
+                {
+                    url: '@Url.Action("Index")',
+                    type: "Post",
+                    dataType: "text",
+                    data: {
+                        "keyword": $("#from-place").val(),
+                        "type": $("#dealtype").val(),
+                        "min": $("#searchlow").val(),
+                        "max": $("#searchhigh").val()
+                    },
+                    success: function (result, status) {},
+                    error: function (xhr) {
+                        alert("错误" + xhr.responseText);
+                    }
+                }
+            );
+        }
+    </script>
+</head>
+<body>
+<div id="fh5co-wrapper">
+    <div id="fh5co-page">
+
+        <header id="fh5co-header-section" class="sticky-banner">
+            <div class="container">
+                <div class="nav-header">
+                    <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+                    <h1 id="fh5co-logo"><a href="#"><i class="icon-home"></i>Deal<span>Hunter</span></a></h1>
+                    <nav id="fh5co-menu-wrap" role="navigation">
+                        <ul class="sf-menu" id="fh5co-primary-menu">
+                            <li class="active">
+                                <a href="#" class="fh5co-sub-ddown">交易</a>
+                                <ul class="fh5co-sub-menu">
+                                    <li><a href="#">大厅</a></li>
+                                    <li><a href='@Url.Action("Creategoodsinfo", "Goods")'>发布</a></li>
+                                </ul>
+                            </li>
+                            <li class="active">
+                                <a href="#" class="fh5co-sub-ddown">我的</a>
+                                <ul class="fh5co-sub-menu">
+                                    <li class="active">
+                                        <a href="#" class="fh5co-sub-ddown">个人</a>
+                                        <ul class="fh5co-sub-menu">
+                                            <li><a href='@Url.Action("Basicinfo", "LR")'>基本信息</a></li>
+                                            <li><a href='@Url.Action("Pwdmanage", "LR")'>密码管理</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#" class="fh5co-sub-ddown">交易</a>
+                                        <ul class="fh5co-sub-menu">
+                                            <li><a href='@Url.Action("Sale", "Deals")'>我发布的</a></li>
+                                            <li><a href='@Url.Action("Buy", "Deals")'>我想要的</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href='@Url.Action("Logout", "LR")'>注销 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- end:header-top -->
+
+        <aside id="fh5co-hero" class="js-fullheight">
+            <div class="flexslider js-fullheight">
+                <ul class="slides">
+                    <li style="background-image: url(images/starve.png); background-size: 100% 100%">
+                        <div class="overlay"></div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2 text-center js-fullheight slider-text">
+                                    <div class="slider-text-inner">
+                                        <h2 class="heading-title">Deal Hunter</h2>
+                                        <p class="fh5co-lead"><a href="#" style="font-weight:bold;">Hunt</a><i class="icon-coin-yen" style="margin-left: 0.5em"> you want</i></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <div id="fh5co-search-map">
+            <div class="search-property">
+                <div class="s-holder">
+                    <h2>Hunting</h2>
+                    <div class="row">
+                        <form class="fh5co-form animate-box" data-animate-effect="fadeIn">
+                            <div class="col-xxs-10 col-xs-10">
+                                <div class="input-field">
+                                    <label style="width: 15%">关键字:</label>
+                                    <input type="text" class="form-control" id="from-place" nama ="keyword" placeholder="Any" style="width: 85%"/>
+                                </div>
+                            </div>
+                            <div class="col-xxs-2 col-xs-2 text-center">
+                                <p><a class="btn btn-primary btn-lg" href="#" style="width: 100%; padding:10px 0 10px 0" onclick="sreach()">搜索</a></p>
+                            </div>
+                            <div class="col-xxs-6 col-xs-6">
+                                <section>
+                                    <label style="width: 15%">交易类型:</label>
+                                    <select class="cs-select cs-skin-border" id="dealtype">
+                                        <option value="2" disabled selected>所有</option>
+                                        <option value="0">出租</option>
+                                        <option value="1">售卖</option>
+                                    </select>
+                                </section>
+                            </div>
+                            <div class="col-xxs-6 col-xs-6">
+                                <section>
+                                    <label style="width: 15%">价格区间:</label>
+                                    <div class="wide">
+                                        <div class="input-field" style="width: 45%;">
+                                            <input type="text" class="form-control" id="min-price" name="searchlow" placeholder="最低价" style="width: 100%"/>
+                                        </div>
+                                        <div class="input-field" style="width: 45%; margin-left: 10%">
+                                            <input type="text" class="form-control" id="max-price" name="searchhigh" placeholder="最高价" style="width: 100%"/>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="fh5co-properties" class="fh5co-section-gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                        <h3>Newest Properties</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit est facilis maiores, perspiciatis accusamus asperiores sint consequuntur debitis.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    @{
+                        foreach (var good in Model)
+                        {
+                    <div class="col-md-4 animate-box">
+                        <div class="property">
+                            <a class="fh5co-property" style="background-color: #eeeeee;" disabled="disabled">
+                                <div class="property-details" style="width: 80%; height: 70%; margin: 20% 10% 10% 10%">
+                                    <h3>@good.gname</h3>
+                                    <span class="price">¥@good.glow-@good.ghigh</span>
+                                    <div class="form-group">
+                                        <textarea disabled name="" class="form-control" style="resize: none;border:0;" id="" cols="30" rows="3" placeholder="Message">@good.gdes </textarea>
+                                    </div>
+                                    <span class="address"><i class="icon-map"></i>@good.uprovince，@good.ucity，@good.udistrict<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@good.ustreet</span>
+                                    <span class="address" style="border-top: none"><i class="icon-envelope"></i>@good.uzipcode</span>
+                                </div>
+                                <span class="status">Sale</span>
+                                <img class="status2" src="images/arrow.svg" onclick="$('#myModal').modal(); document.getElementById('good_id').value = @good.gid"/>
+                                <ul class="list-details">
+                                    <li>@good.uname&nbsp;&nbsp;@good.ugender</li>
+                                    <li>@good.uceilphone</li>
+                                    <li>@good.umail</li>
+                                </ul>
+                            </a>
+                        </div>
+                    </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div id="footer">
+                <div class="container">
+                    <div class="row row-bottom-padded-md">
+                        <div class="col-md-3">
+                            <h3 class="section-title">About Homestate</h3>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>
+                        </div>
+
+                        <div class="col-md-3 col-md-push-1">
+                            <h3 class="section-title">Links</h3>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Properties</a></li>
+                                <li><a href="#">Agent</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">API</a></li>
+                                <li><a href="#">FAQ / Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-3">
+                            <h3 class="section-title">Information</h3>
+                            <ul>
+                                <li><a href="#">Terms &amp; Condition</a></li>
+                                <li><a href="#">License</a></li>
+                                <li><a href="#">Privacy &amp; Policy</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <h3 class="section-title">Newsletter</h3>
+                            <p>Subscribe for our newsletter</p>
+                            <form class="form-inline" id="fh5co-header-subscribe">
+                                <div class="row">
+                                    <div class="col-md-12 col-md-offset-0">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="email" placeholder="Enter your email">
+                                            <button type="submit" class="btn btn-default"><i class="icon-paper-plane"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">买买买！！！</h4>
+                    </div>
+                    <form class="fh5co-form" style="opacity: 0.8; border-radius: 10px; margin:0 0 0 0; padding: 0 0 0 0">
+                        <input hidden="hidden" id="good_id" name="gid" value="" />
+                        <div class="form-group col-lg-10 col-lg-offset-1" style="margin-top: 1em">
+                            <label style="display:block; font-size: 16px; color: #0b0b0b">价格区间</label>
+                            <input type="number" class="form-control" id="deallow" name="min" value="" placeholder="最低价" style="padding: 0 0 0 0; width: 45%; margin-left: 9%; display: inline-block" />
+                            <input type="number" class="form-control" id="dealhigh" name="max" value="" placeholder="最高价" style="padding: 0 0 0 0; width: 45%; display: inline-block" />
+                        </div>
+                        <div class="form-group col-lg-10 col-lg-offset-1" style="margin-bottom: 1em">
+                            <label style="font-size: 16px; color: #0b0b0b">描述</label>
+                            <input type="text" class="form-control" id="dealdes" name="des" value="" style="padding: 0 0 0 0" />
+                        </div>
+                        <input hidden="hidden" name="x" type="number" />
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" style="margin-right: 8%" onclick="deal()">提交</button>
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+
+    </div>
+    <!-- END fh5co-page -->
+
+</div>
+<!-- END fh5co-wrapper -->
+
+<!-- jQuery -->
+
+
+<script src="js/jquery.min.js"></script>
+<!-- jQuery Easing -->
+<script src="js/jquery.easing.1.3.js"></script>
+<!-- Bootstrap -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Waypoints -->
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/sticky.js"></script>
+<!-- Superfish -->
+<script src="js/hoverIntent.js"></script>
+<script src="js/superfish.js"></script>
+<!-- Flexslider -->
+<script src="js/jquery.flexslider-min.js"></script>
+<!-- Date Picker -->
+<script src="js/bootstrap-datepicker.min.js"></script>
+<!-- CS Select -->
+<script src="js/classie.js"></script>
+<script src="js/selectFx.js"></script>
+
+
+<!-- Main JS -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
+

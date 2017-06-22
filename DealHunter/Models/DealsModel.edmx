@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DealsModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="goods">
+          <Key>
+            <PropertyRef Name="gid" />
+          </Key>
+          <Property Name="gid" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="sid" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="gname" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="gtype" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="glow" Type="int" Nullable="false" />
+          <Property Name="ghigh" Type="int" Nullable="false" />
+          <Property Name="gdes" Type="varchar" MaxLength="8192" Nullable="false" />
+          <Property Name="gstate" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="gstarttime" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="purchase">
+          <Key>
+            <PropertyRef Name="pgid" />
+            <PropertyRef Name="puid" />
+          </Key>
+          <Property Name="pgid" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="puid" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="plow" Type="int" Nullable="false" />
+          <Property Name="phigh" Type="int" Nullable="false" />
+          <Property Name="pdes" Type="varchar" MaxLength="1024" Nullable="false" />
+          <Property Name="pstate" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="upwd" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="upincode" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="uname" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ugender" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="uage" Type="int" Nullable="false" />
+          <Property Name="ucareer" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="umail" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="utelephone" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="uceilphone" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="uprovince" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="ucity" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="udistrict" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="ustreet" Type="varchar" MaxLength="96" Nullable="false" />
+          <Property Name="uzipcode" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <Association Name="goodsidfk">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="goods" Type="Self.goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="goods">
+              <PropertyRef Name="sid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchasepgidfk">
+          <End Role="goods" Type="Self.goods" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="gid" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="pgid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchasepuidfk">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="puid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DealsModelStoreContainer">
+          <EntitySet Name="goods" EntityType="Self.goods" Schema="dealhunter" store:Type="Tables" />
+          <EntitySet Name="purchase" EntityType="Self.purchase" Schema="dealhunter" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dealhunter" store:Type="Tables" />
+          <AssociationSet Name="goodsidfk" Association="Self.goodsidfk">
+            <End Role="user" EntitySet="user" />
+            <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="purchasepgidfk" Association="Self.purchasepgidfk">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="purchase" EntitySet="purchase" />
+          </AssociationSet>
+          <AssociationSet Name="purchasepuidfk" Association="Self.purchasepuidfk">
+            <End Role="user" EntitySet="user" />
+            <End Role="purchase" EntitySet="purchase" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DealsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="goods">
+          <Key>
+            <PropertyRef Name="gid" />
+          </Key>
+          <Property Name="gid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gname" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gtype" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="glow" Type="Int32" Nullable="false" />
+          <Property Name="ghigh" Type="Int32" Nullable="false" />
+          <Property Name="gdes" Type="String" MaxLength="8192" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gstate" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gstarttime" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="user" Relationship="Self.goodsidfk" FromRole="goods" ToRole="user" />
+          <NavigationProperty Name="purchase" Relationship="Self.purchasepgidfk" FromRole="goods" ToRole="purchase" />
+        </EntityType>
+        <EntityType Name="purchase">
+          <Key>
+            <PropertyRef Name="pgid" />
+            <PropertyRef Name="puid" />
+          </Key>
+          <Property Name="pgid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="puid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="plow" Type="Int32" Nullable="false" />
+          <Property Name="phigh" Type="Int32" Nullable="false" />
+          <Property Name="pdes" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pstate" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="goods" Relationship="Self.purchasepgidfk" FromRole="purchase" ToRole="goods" />
+          <NavigationProperty Name="user" Relationship="Self.purchasepuidfk" FromRole="purchase" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="upwd" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="upincode" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ugender" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uage" Type="Int32" Nullable="false" />
+          <Property Name="ucareer" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="umail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="utelephone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uceilphone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uprovince" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ucity" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="udistrict" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ustreet" Type="String" MaxLength="96" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uzipcode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="goods" Relationship="Self.goodsidfk" FromRole="user" ToRole="goods" />
+          <NavigationProperty Name="purchase" Relationship="Self.purchasepuidfk" FromRole="user" ToRole="purchase" />
+        </EntityType>
+        <Association Name="goodsidfk">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="goods" Type="Self.goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="goods">
+              <PropertyRef Name="sid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchasepgidfk">
+          <End Role="goods" Type="Self.goods" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="gid" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="pgid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchasepuidfk">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="puid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="goods" EntityType="Self.goods" />
+          <EntitySet Name="purchase" EntityType="Self.purchase" />
+          <EntitySet Name="user" EntityType="Self.user" />
+          <AssociationSet Name="goodsidfk" Association="Self.goodsidfk">
+            <End Role="user" EntitySet="user" />
+            <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="purchasepgidfk" Association="Self.purchasepgidfk">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="purchase" EntitySet="purchase" />
+          </AssociationSet>
+          <AssociationSet Name="purchasepuidfk" Association="Self.purchasepuidfk">
+            <End Role="user" EntitySet="user" />
+            <End Role="purchase" EntitySet="purchase" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DealsModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="goods">
+            <EntityTypeMapping TypeName="DealsModel.goods">
+              <MappingFragment StoreEntitySet="goods">
+                <ScalarProperty Name="gid" ColumnName="gid" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+                <ScalarProperty Name="gname" ColumnName="gname" />
+                <ScalarProperty Name="gtype" ColumnName="gtype" />
+                <ScalarProperty Name="glow" ColumnName="glow" />
+                <ScalarProperty Name="ghigh" ColumnName="ghigh" />
+                <ScalarProperty Name="gdes" ColumnName="gdes" />
+                <ScalarProperty Name="gstate" ColumnName="gstate" />
+                <ScalarProperty Name="gstarttime" ColumnName="gstarttime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="purchase">
+            <EntityTypeMapping TypeName="DealsModel.purchase">
+              <MappingFragment StoreEntitySet="purchase">
+                <ScalarProperty Name="pgid" ColumnName="pgid" />
+                <ScalarProperty Name="puid" ColumnName="puid" />
+                <ScalarProperty Name="plow" ColumnName="plow" />
+                <ScalarProperty Name="phigh" ColumnName="phigh" />
+                <ScalarProperty Name="pdes" ColumnName="pdes" />
+                <ScalarProperty Name="pstate" ColumnName="pstate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="DealsModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="upwd" ColumnName="upwd" />
+                <ScalarProperty Name="upincode" ColumnName="upincode" />
+                <ScalarProperty Name="uname" ColumnName="uname" />
+                <ScalarProperty Name="ugender" ColumnName="ugender" />
+                <ScalarProperty Name="uage" ColumnName="uage" />
+                <ScalarProperty Name="ucareer" ColumnName="ucareer" />
+                <ScalarProperty Name="umail" ColumnName="umail" />
+                <ScalarProperty Name="utelephone" ColumnName="utelephone" />
+                <ScalarProperty Name="uceilphone" ColumnName="uceilphone" />
+                <ScalarProperty Name="uprovince" ColumnName="uprovince" />
+                <ScalarProperty Name="ucity" ColumnName="ucity" />
+                <ScalarProperty Name="udistrict" ColumnName="udistrict" />
+                <ScalarProperty Name="ustreet" ColumnName="ustreet" />
+                <ScalarProperty Name="uzipcode" ColumnName="uzipcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

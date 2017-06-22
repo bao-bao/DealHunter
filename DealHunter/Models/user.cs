@@ -18,6 +18,7 @@ namespace DealHunter.Models
         public user()
         {
             this.goods = new HashSet<goods>();
+            this.purchase = new HashSet<purchase>();
         }
     
         public string uid { get; set; }
@@ -38,5 +39,7 @@ namespace DealHunter.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<goods> goods { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<purchase> purchase { get; set; }
     }
 }

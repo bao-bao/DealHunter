@@ -177,13 +177,32 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\DealsController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\LRController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BasicGood.cs" />
+    <Compile Include="Models\Deal.cs" />
+    <Compile Include="Models\ExtendGood.cs" />
+    <Compile Include="Models\DealsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DealsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DealsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DealsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DealsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DealsModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\goods.cs">
-      <DependentUpon>GoodsModel.tt</DependentUpon>
+      <DependentUpon>DealsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GoodsModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -217,8 +236,11 @@
       <DependentUpon>LRModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\MD5Encrypt.cs" />
+    <Compile Include="Models\purchase.cs">
+      <DependentUpon>DealsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\user.cs">
-      <DependentUpon>GoodsModel.tt</DependentUpon>
+      <DependentUpon>DealsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -227,7 +249,16 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\animate.css" />
+    <Content Include="css\bootstrap-datepicker.min.css" />
+    <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\cs-select.css" />
+    <Content Include="css\cs-skin-border.css" />
+    <Content Include="css\flexslider.css" />
+    <Content Include="css\icomoon.css" />
+    <Content Include="css\magnific-popup.css" />
+    <Content Include="css\modal-form.css" />
+    <Content Include="css\style.css" />
     <Content Include="css\style3.css" />
     <Content Include="css\style2.css" />
     <Content Include="css\superfish.css" />
@@ -239,12 +270,36 @@
     <Content Include="images\bg_2.jpg" />
     <Content Include="images\createdeal.png" />
     <Content Include="images\geometry2.png" />
+    <Content Include="images\loader.gif" />
     <Content Include="images\login.png" />
     <Content Include="images\pwdmanage.png" />
     <Content Include="images\register.png" />
+    <Content Include="images\starve.png" />
+    <Content Include="js\bootstrap-datepicker.min.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\classie.js" />
+    <Content Include="js\hoverIntent.js" />
+    <Content Include="js\jquery.easing.1.3.js" />
+    <Content Include="js\jquery.flexslider-min.js" />
     <Content Include="js\jquery.min.js" />
+    <Content Include="js\jquery.waypoints.min.js" />
     <Content Include="js\jsAddress.js" />
+    <Content Include="js\main.js" />
+    <Content Include="js\modernizr-2.6.2.min.js" />
+    <Content Include="js\respond.min.js" />
+    <Content Include="js\selectFx.js" />
+    <Content Include="js\sticky.js" />
+    <Content Include="js\superfish.js" />
+    <Content Include="Models\DealsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DealsModel.edmx</DependentUpon>
+      <LastGenOutput>DealsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DealsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DealsModel.edmx</DependentUpon>
+      <LastGenOutput>DealsModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\GoodsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GoodsModel.edmx</DependentUpon>
@@ -265,8 +320,6 @@
       <DependentUpon>LRModel.edmx</DependentUpon>
       <LastGenOutput>LRModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="css\.DS_Store" />
     <Content Include="css\style2.css.map" />
     <Content Include="images\.DS_Store" />
@@ -285,19 +338,18 @@
     <Content Include="Models\GoodsModel.edmx.diagram">
       <DependentUpon>GoodsModel.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-3.2.1.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
+    <EntityDeploy Include="Models\DealsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DealsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DealsModel.edmx.diagram">
+      <DependentUpon>DealsModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Views\Deals\Buy.cshtml" />
+    <None Include="Views\Deals\Index.cshtml" />
+    <None Include="Views\Deals\Sale.cshtml" />
+    <None Include="Views\Deals\Statistics.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -316,6 +368,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="fonts\icomoon\" />
+    <Folder Include="js\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -323,7 +377,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

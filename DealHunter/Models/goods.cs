@@ -14,6 +14,12 @@ namespace DealHunter.Models
     
     public partial class goods
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public goods()
+        {
+            this.purchase = new HashSet<purchase>();
+        }
+    
         public string gid { get; set; }
         public string sid { get; set; }
         public string gname { get; set; }
@@ -25,5 +31,7 @@ namespace DealHunter.Models
         public System.DateTime gstarttime { get; set; }
     
         public virtual user user { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<purchase> purchase { get; set; }
     }
 }
