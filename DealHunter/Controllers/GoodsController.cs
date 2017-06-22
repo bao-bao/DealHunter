@@ -1,6 +1,7 @@
 ﻿using DealModeldll;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
@@ -62,12 +63,15 @@ namespace DealHunter.Controllers
                     gstate = "1",
                     gstarttime = DateTime.Now
                 };
-                return EFOperationdll.GoodsOp.addGoods(db, newgoods);
+                //return EFOperationdll.GoodsOp.addGoods(db, newgoods);
+                db.goods.Add(newgoods);
+                db.SaveChanges();
+                return "1";
             }
-            catch (Exception e)
+            catch (DbUpdateConcurrencyException e)
             {
                 Console.WriteLine(e.StackTrace);
-                return "0";
+                return e.StackTrace;
             }
         }
     }

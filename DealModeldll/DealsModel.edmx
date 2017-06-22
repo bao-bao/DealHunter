@@ -127,7 +127,7 @@
           <Property Name="ghigh" Type="Int32" Nullable="false" />
           <Property Name="gdes" Type="String" MaxLength="8192" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="gstate" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="gstarttime" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="gstarttime" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="None" ConcurrencyMode="None" />
           <NavigationProperty Name="user" Relationship="Self.goodsidfk" FromRole="goods" ToRole="user" />
           <NavigationProperty Name="purchase" Relationship="Self.purchasepgidfk" FromRole="goods" ToRole="purchase" />
         </EntityType>
