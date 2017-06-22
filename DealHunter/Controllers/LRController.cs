@@ -64,7 +64,7 @@ namespace DealHunter.Controllers
                 {
                     return "-1";
                 }
-                else if (upwd != MD5Encrypt.GetMd5(loginpwd))
+                else if (upwd != MD5Encrypt.MD5Encrypt.GetMd5(loginpwd))
                 {
                     return "-2";
                 }
@@ -91,7 +91,7 @@ namespace DealHunter.Controllers
         {
             user registeruser = new user();
             registeruser.uid = registerid;
-            registeruser.upwd = MD5Encrypt.GetMd5(registerpwd);
+            registeruser.upwd = MD5Encrypt.MD5Encrypt.GetMd5(registerpwd);
             registeruser.upincode = registerpincode;
             registeruser.uname = registername;
             registeruser.ugender = "";
@@ -227,11 +227,11 @@ namespace DealHunter.Controllers
                 {
                     return "-1";
                 }
-                if (puser.upwd != MD5Encrypt.GetMd5(oldpwd))
+                if (puser.upwd != MD5Encrypt.MD5Encrypt.GetMd5(oldpwd))
                 {
                     return "-2";
                 }
-                puser.upwd = MD5Encrypt.GetMd5(newpwd);
+                puser.upwd = MD5Encrypt.MD5Encrypt.GetMd5(newpwd);
                 db.user.Attach(puser);
                 db.Entry(puser).State = EntityState.Modified;
                 db.SaveChanges();
