@@ -10,22 +10,27 @@ namespace DbTransdll {
 	{
 		// TODO:  在此处添加此类的方法。
 	public:
-		static String typetrans(String dbtype)
+		static String ^typetrans(String ^dbtype)
 		{
-			if (dbtype == "0"->ToString)
+			String ^s1 = gcnew String("0");
+			String ^s2 = gcnew String("1");
+			String ^s3 = gcnew String("在售");
+			String ^s4 = gcnew String("结售");
+			String ^s5 = gcnew String("状态获取错误");
+			if (dbtype == s1)
 			{
-				return "在售"->ToString;
+				return s3;
 			}
-			if (dbtype == "1"->ToString)
+			if (dbtype == s2)
 			{
-				return "结售"->ToString;
+				return s4;
 			}
-			return "状态获取错误"->ToString;
+			return s5;
 		}
 
-		static String timetrans(DateTime dbtime)
+		static String ^timetrans(DateTime ^dbtime)
 		{
-			return dbtime.ToString;
+			return dbtime->ToString();
 		}
 	};
 }

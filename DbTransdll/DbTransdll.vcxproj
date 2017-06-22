@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{3131A723-EB54-43ED-93C6-A2B985EFCB48}</ProjectGuid>
-    <TargetFrameworkVersion>v4.5.0</TargetFrameworkVersion>
+    <ProjectGuid>{221C2B6A-65E1-4FD7-973A-44E0A5263A68}</ProjectGuid>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>DbTransdll</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>

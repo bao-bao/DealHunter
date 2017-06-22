@@ -317,6 +317,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DbTransdll\DbTransdll.vcxproj">
+      <Project>{221c2b6a-65e1-4fd7-973a-44e0a5263a68}</Project>
+      <Name>DbTransdll</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DealModeldll\DealModeldll.csproj">
       <Project>{06fd79f2-b158-4c8a-9a10-486e8f76ae22}</Project>
       <Name>DealModeldll</Name>
