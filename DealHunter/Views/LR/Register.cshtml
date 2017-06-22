@@ -82,7 +82,11 @@
                 );
             }
         function tologin() {
+            $("#reloginbtn").click(
+                function () {
                     window.location = '@Url.Action("Login")';
+                }
+            )
         }
     </script>
 </head>
