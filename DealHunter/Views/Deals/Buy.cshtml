@@ -57,6 +57,9 @@
                         else if (result == "-1") {
                             alert("登录失效，请重新登陆");
                         }
+                        else {
+                            alert("内部故障");
+                        }
                     },
                     error: function (xhr) {
                         alert("错误" + xhr.responseText);
