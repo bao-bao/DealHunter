@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IndexTalkdll, Version=1.0.0.0, Culture=neutral, PublicKeyToken=34aed1d0a0f200a8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\IndexTalkdll\v4.0_1.0.0.0__34aed1d0a0f200a8\IndexTalkdll.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -241,11 +245,28 @@
     <Content Include="images\.DS_Store" />
     <Content Include="js\.DS_Store" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <None Include="Views\Deals\Buy.cshtml" />
+    <None Include="Properties\PublishProfiles\DealHunterVer1Config.pubxml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Deals\Buy.cshtml" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Views\Deals\Search.cshtml" />
-    <None Include="Views\Deals\Index.cshtml" />
-    <None Include="Views\Deals\Sale.cshtml" />
-    <None Include="Views\Deals\Statistics.cshtml" />
+    <Content Include="Views\Deals\Index.cshtml" />
+    <Content Include="Views\Deals\Sale.cshtml" />
+    <Content Include="Views\Deals\Statistics.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

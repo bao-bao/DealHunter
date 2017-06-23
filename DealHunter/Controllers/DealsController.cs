@@ -18,6 +18,7 @@ namespace DealHunter.Controllers
         // GET: all goods
         public ActionResult Index()
         {
+            ViewData["IndexTalk"] = IndexTalkdll.IndexTalk.getIndexTalk();
             return View(DealsOp.getGoods(db));
         }
 
@@ -146,8 +147,8 @@ namespace DealHunter.Controllers
         public ActionResult Statistics(string gid, string min, string max)
         {
             ViewData["goodid"] = gid;
-            try
-            {
+            //try
+            //{
                 List<Deal> deals = DealsOp.filter(db,gid, min, max);
                 if (deals.Count != 0)
                 {
@@ -158,15 +159,18 @@ namespace DealHunter.Controllers
                 }
                 else
                 {
-
+                    ViewData["avgmin"] = 0;
+                    ViewData["avgmax"] = 0;
+                    ViewData["min"] = 0;
+                    ViewData["max"] = 0;
                 }
                 return View(deals);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-                return RedirectToAction("Login", "LR");
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.StackTrace);
+            //    return RedirectToAction("Login", "LR");
+            //}
         }
 
         protected override void Dispose(bool disposing)
