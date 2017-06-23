@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DealModeldll;
 using System.Data.Entity;
 using NumCalculatorComLib;
+using System.Threading;
 
 namespace SqlOperation
 {
@@ -17,30 +18,7 @@ namespace SqlOperation
             try
             {
                 List<goods> goods = db.goods.Where(u => u.gstate == "1").Select(u => u).ToList();
-                foreach (var good in goods)
-                {
-                    user cuser = (from a in db.user where a.uid == good.sid select a).FirstOrDefault();
-                    ExtendGood bg = new ExtendGood()
-                    {
-                        gid = good.gid,
-                        sid = cuser.uid,
-                        gname = good.gname,
-                        glow = good.glow,
-                        ghigh = good.ghigh,
-                        gtype = good.gtype,
-                        gdes = good.gdes,
-                        uname = cuser.uname,
-                        ugender = cuser.ugender,
-                        umail = cuser.umail,
-                        uceilphone = cuser.uceilphone,
-                        uprovince = cuser.uprovince,
-                        ucity = cuser.ucity,
-                        udistrict = cuser.udistrict,
-                        ustreet = cuser.ustreet,
-                        uzipcode = cuser.uzipcode
-                    };
-                    goodsinfo.Add(bg);
-                }
+                goodsinfo = parseGoods(db, goods);
             }
             catch (Exception e)
             {
@@ -72,37 +50,82 @@ namespace SqlOperation
                 {
                     sql += " and glow <= " + max;
                 }
+
                 List<goods> goods = db.Database.SqlQuery<goods>(sql).ToList();
-                foreach (var good in goods)
-                {
-                    user us = (from a in db.user where a.uid == good.sid select a).FirstOrDefault();
-                    ExtendGood bg = new ExtendGood()
-                    {
-                        gid = good.gid,
-                        sid = us.uid,
-                        gname = good.gname,
-                        glow = good.glow,
-                        ghigh = good.ghigh,
-                        gtype = good.gtype,
-                        gdes = good.gdes,
-                        uname = us.uname,
-                        ugender = us.ugender,
-                        umail = us.umail,
-                        uceilphone = us.uceilphone,
-                        uprovince = us.uprovince,
-                        ucity = us.ucity,
-                        udistrict = us.udistrict,
-                        ustreet = us.ustreet,
-                        uzipcode = us.uzipcode
-                    };
-                    goodsinfo.Add(bg);
-                }
+                goodsinfo = parseGoods(db, goods);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
             }
             return goodsinfo;
+        }
+
+        private delegate ExtendGood Extend(DealsEntities db, goods g);
+        private static Extend extend = (db, g) => {
+            user us = (from a in db.user where a.uid == g.sid select a).FirstOrDefault();
+            ExtendGood bg = new ExtendGood()
+            {
+                gid = g.gid,
+                sid = us.uid,
+                gname = g.gname,
+                glow = g.glow,
+                ghigh = g.ghigh,
+                gtype = g.gtype,
+                gdes = g.gdes,
+                uname = us.uname,
+                ugender = us.ugender,
+                umail = us.umail,
+                uceilphone = us.uceilphone,
+                uprovince = us.uprovince,
+                ucity = us.ucity,
+                udistrict = us.udistrict,
+                ustreet = us.ustreet,
+                uzipcode = us.uzipcode
+            };
+            return bg;
+        };
+
+        private static List<ExtendGood> parseGoods(DealsEntities db, List<goods> good)
+        {
+            List<ExtendGood> exGoods = new List<ExtendGood>();
+            int threadSize = (good.Count / 100) + 1;
+            int completed = 0;
+            ManualResetEvent all = new ManualResetEvent(false);
+            int workload = good.Count / threadSize;
+
+            for (int i = 0; i < threadSize; i++)
+            {
+                int start, end;
+                if (i <= good.Count % threadSize)
+                {
+                    start = i * workload + i;
+                    end = start + workload;
+                }
+                else
+                {
+                    start = i * workload + good.Count % threadSize;
+                    end = start + workload;
+                }
+                ThreadPool.QueueUserWorkItem(state =>
+                {
+                    for (int num = start; num < end; num++)
+                    {
+                        ExtendGood ex = extend(db, good.ElementAt(num));
+                        lock (exGoods)
+                        {
+                            exGoods.Add(ex);
+                        }
+                    }
+                    if (Interlocked.Increment(ref completed) == workload)
+                    {
+                        all.Set();
+                    }
+                });
+            }
+            all.WaitOne(500);
+            all.Dispose();
+            return exGoods;
         }
 
         public static bool makeDeal(DealsEntities db, string gid, string cid, string min, string max, string des)
@@ -122,7 +145,7 @@ namespace SqlOperation
                 db.SaveChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
                 return false;
@@ -204,7 +227,7 @@ namespace SqlOperation
                     basics.Add(bg);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
             }
@@ -260,7 +283,7 @@ namespace SqlOperation
                     deals.Add(deal);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
             }
@@ -271,7 +294,7 @@ namespace SqlOperation
         {
             Calculator myCal = new Calculator();
             int result = 0;
-            foreach(var deal in deals)
+            foreach (var deal in deals)
             {
                 result = myCal.Add(result, deal.low);
             }
