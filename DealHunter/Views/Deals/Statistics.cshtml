@@ -116,7 +116,7 @@
 
             <div id="fh5co-properties" class="fh5co-section-gray" style="padding: 0">
 
-                <div id="fh5co-search-map" style="padding: 2em 0 2em 0">
+                <div id="fh5co-search-map" style="padding: 2em 0 2em 0; margin-bottom:40px">
                     <div class="search-property">
                         <div class="s-holder">
                             <h2>筛选</h2>
@@ -147,7 +147,7 @@
                                         <label style="width: 40%">最低出价:</label>
                                         <div class="wide" style="width: 60%; padding-right: 0%">
                                             <div class="input-field" style="width: 100%;">
-                                                <input type="text" class="form-control" id="slow" style="width: 100%" disabled />
+                                                <input type="text" class="form-control" id="slow" style="width: 100%" disabled value="@ViewData["min"]"/>
                                             </div>
                                         </div>
                                     </section>
@@ -157,7 +157,7 @@
                                         <label style="width: 40%">最高出价:</label>
                                         <div class="wide" style="width: 60%; padding-right: 0%">
                                             <div class="input-field" style="width: 100%;">
-                                                <input type="text" class="form-control" id="shigh" style="width: 100%" disabled />
+                                                <input type="text" class="form-control" id="shigh" style="width: 100%" disabled value="@ViewData["max"]"/>
                                             </div>
                                         </div>
                                     </section>
@@ -201,10 +201,10 @@
                                     </span>
                                     <div class="feature-copy">
                                         <input hidden="hidden" value="'@deal.gid'" id="gid" />
-                                        <h3>@deal.low-@deal.high</h3>
+                                        <h3>¥@deal.low-@deal.high</h3>
                                         <p>@deal.uname</p>
                                         <p>@deal.des</p>
-                                        <p><a>@deal.mail    @deal.cellphone</a></p>
+                                        <p><a>@deal.mail&nbsp;&nbsp;&nbsp;&nbsp;@deal.cellphone</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -219,46 +219,11 @@
     <footer>
         <div id="footer">
             <div class="container">
-                <div class="row row-bottom-padded-md">
-                    <div class="col-md-3">
-                        <h3 class="section-title">About Homestate</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>
-                    </div>
-
-                    <div class="col-md-3 col-md-push-1">
-                        <h3 class="section-title">Links</h3>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Properties</a></li>
-                            <li><a href="#">Agent</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">API</a></li>
-                            <li><a href="#">FAQ / Contact</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-3">
-                        <h3 class="section-title">Information</h3>
-                        <ul>
-                            <li><a href="#">Terms &amp; Condition</a></li>
-                            <li><a href="#">License</a></li>
-                            <li><a href="#">Privacy &amp; Policy</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h3 class="section-title">Newsletter</h3>
-                        <p>Subscribe for our newsletter</p>
-                        <form class="form-inline" id="fh5co-header-subscribe">
-                            <div class="row">
-                                <div class="col-md-12 col-md-offset-0">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="email" placeholder="Enter your email">
-                                        <button type="submit" class="btn btn-default"><i class="icon-paper-plane"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                <div class="row">
+                    <div class="col-md-4 col-lg-offset-4" style="text-align:center">
+                        <p style="margin-top:1.5rem">
+                            &reg;copyright  Deal Hunter      by Empire Yin.
+                        </p>
                     </div>
                 </div>
             </div>

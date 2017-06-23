@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CppDll.cs" />
     <Compile Include="DealsOp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

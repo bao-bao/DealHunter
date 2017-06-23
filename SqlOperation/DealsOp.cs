@@ -86,6 +86,7 @@ namespace SqlOperation
             return bg;
         };
 
+        // 使用多线程处理商品信息，用以返回到View
         private static List<ExtendGood> parseGoods(DealsEntities db, List<goods> good)
         {
             List<ExtendGood> exGoods = new List<ExtendGood>();
@@ -252,12 +253,12 @@ namespace SqlOperation
             }
         }
 
-        public static List<Deal> filter(DealsEntities db, string min, string max)
+        public static List<Deal> filter(DealsEntities db,string gid, string min, string max)
         {
             List<Deal> deals = new List<Deal>();
             try
             {
-                string sql = "select * from purchase where 1=1";
+                string sql = "select * from purchase where pgid = '" + gid + "'";
                 if (min != "")
                 {
                     sql += " and phigh > " + min;
@@ -310,6 +311,31 @@ namespace SqlOperation
                 result = myCal.Add(result, deal.high);
             }
             result = myCal.Div(result, deals.Count);
+            return result;
+        }
+
+        public static int getMin(List<Deal> deals)
+        {
+            int result = deals.ElementAt(0).low;
+            foreach (var deal in deals)
+            {
+                if(CppDll.dhintCompare(result, deal.low) == 1)
+                {
+                    result = deal.low;
+                }
+            }
+            return result;
+        }
+        public static int getMax(List<Deal> deals)
+        {
+            int result = deals.ElementAt(0).high;
+            foreach (var deal in deals)
+            {
+                if (CppDll.dhintCompare(result, deal.high) == -1)
+                {
+                    result = deal.high;
+                }
+            }
             return result;
         }
     }

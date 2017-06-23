@@ -147,7 +147,7 @@
                                         </span>
                                         <div class="feature-copy">
                                             <h3>@good.gname</h3>
-                                            <p>@good.glow - @good.ghigh</p>
+                                            <p>¥@good.glow-@good.ghigh</p>
                                             <p>@good.gstarttime</p>
                                             <p><a href="@Url.Action("Statistics")?gid=@good.gid&min=&max=">Learn More</a></p>
                                         </div>
@@ -162,46 +162,11 @@
             <footer>
                 <div id="footer">
                     <div class="container">
-                        <div class="row row-bottom-padded-md">
-                            <div class="col-md-3">
-                                <h3 class="section-title">About Homestate</h3>
-                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>
-                            </div>
-
-                            <div class="col-md-3 col-md-push-1">
-                                <h3 class="section-title">Links</h3>
-                                <ul>
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Properties</a></li>
-                                    <li><a href="#">Agent</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">API</a></li>
-                                    <li><a href="#">FAQ / Contact</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="col-md-3">
-                                <h3 class="section-title">Information</h3>
-                                <ul>
-                                    <li><a href="#">Terms &amp; Condition</a></li>
-                                    <li><a href="#">License</a></li>
-                                    <li><a href="#">Privacy &amp; Policy</a></li>
-                                    <li><a href="#">Contact Us</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-3">
-                                <h3 class="section-title">Newsletter</h3>
-                                <p>Subscribe for our newsletter</p>
-                                <form class="form-inline" id="fh5co-header-subscribe">
-                                    <div class="row">
-                                        <div class="col-md-12 col-md-offset-0">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" id="email" placeholder="Enter your email">
-                                                <button type="submit" class="btn btn-default"><i class="icon-paper-plane"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-offset-4" style="text-align:center">
+                                <p style="margin-top:1.5rem">
+                                    &reg;copyright  Deal Hunter      by Empire Yin.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -212,13 +177,13 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">真的要放弃猎物吗？</h4>
+                            <h4 class="modal-title" id="myModalLabel">修改商品状态</h4>
                         </div>
                         <input hidden="hidden" type="text" id="good_id" name="gid" value="" />
                         <input hidden="hidden" type="text" id="gstate" name="state" value="" />
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">考虑一下_(:з」∠)_ </button>
-                            <button type="button" class="btn btn-primary" style="margin-right: 8%" onclick="changeState()">我要更好的(╯‵□′)╯︵┻━┻</button>
+                            <button type="button" class="btn btn-primary" style="margin-right: 8%" onclick="changeState()">改了！(╯‵□′)╯︵┻━┻</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal -->
